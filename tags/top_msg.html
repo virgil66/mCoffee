@@ -1,0 +1,30 @@
+<top-msg>
+	<div class="top-msg">
+		<div class="top-msg-common msg" click={ handleMessage }>
+			<span></span>
+		</div>
+		<div class="top-msg-common top" click={ handleReturnTop }>
+			<span></span>
+		</div>
+	</div>
+	<script>
+		handleMessage() {
+			window.location.href = "messageConsult.html";
+		}
+		handleReturnTop() {
+			$('html,body').animate({
+				scrollTop: $('body').offset().top
+			}, 500);
+		}
+		this.on('mount', function() {
+			$(window).scroll(function() {
+				var top = $('body').scrollTop();
+				if(top > 300) {
+					$('.top-msg-pos').fadeIn();
+				} else {
+					$('.top-msg-pos').fadeOut();
+				}
+			})
+		})
+	</script>
+</top-msg>

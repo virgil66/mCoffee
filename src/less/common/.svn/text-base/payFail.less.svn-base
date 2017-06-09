@@ -1,0 +1,47 @@
+@import (reference) '../lib/bracket.less';
+
+.box-white {
+  padding: rem(10);
+  .box-white-container {
+    height: auto;
+    background-color: @cl_00;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.10);
+    border-top-left-radius: rem(10);
+    border-top-right-radius: rem(10);
+    margin-left: rem(2);
+    margin-right: rem(2);
+  }
+  .box-white-border {
+  	width: 100%;
+	margin-top: rem(-8);
+  }
+}
+.box-white-tips {
+    text-align: center;
+    color: @cl_66;
+    font-size: 14px;
+    letter-spacing: rem(-0.34);
+    line-height: rem(19.2);
+    padding: rem(14) 0;
+    margin: 0 rem(8);
+    border-bottom: 1px solid @cl_f1;
+    i {
+        font-style: normal;
+    }
+}
+.box-empty-icon {
+    text-align: center;
+    padding: rem(38) 0 rem(28);
+    .box-empty-icon-icon {
+        width: rem(35);
+        height: rem(35);
+    }
+}
+.box-empty-text {
+    text-align: center;
+    color: @cl_44;
+    font-size: 20px;
+    letter-spacing: rem(-0.48);
+    line-height: rem(21);
+    padding-bottom: rem(50);
+}

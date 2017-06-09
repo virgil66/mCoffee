@@ -1,0 +1,13 @@
+@import (reference) '../lib/bracket.less';
+
+html, body {
+	background: #fff;
+}
+.support-bank {
+	padding: 15px;
+	.support-bank-list {
+		color: @cl_66;
+		font-size: 15px;
+		letter-spacing: -0.09px;
+	}
+}

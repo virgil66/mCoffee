@@ -1,0 +1,49 @@
+/* layout */
+html, body {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: none;
+    background-color: #f1f1f1;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    backface-visibility: hidden;
+}
+
+.position(@type; @top:auto; @right: auto; @bottom: auto; @left: auto; @width: auto; @height: auto) {
+    position: @type;
+    top: @top;
+    right: @right;
+    bottom: @bottom;
+    left: @left;
+    width: @width;
+    height: @height;
+}
+
+@media screen and (min-width: 800px) {
+    html {
+        font-size: 38px !important;
+    }
+
+    body {
+        overflow: hidden;
+        &:after {
+            .position(absolute, 50%, 50%, auto, auto, 432px, 882px);
+            transform: translate3d(50%, -50%, 0);
+            // background-image: url('../images/chrome-iphone6-432x882@2x.jpg');
+            content: '';
+            display: block;
+            background-size: contain;
+        }
+        #page {
+            .position(absolute, 50%, 0, 0, 0, auto, 100%);
+            transform: translate3d(0, -50%, 0);
+            width: 375px;
+            height: 667px;
+            margin: 0 auto;
+            z-index: 200;
+            overflow-y: auto;
+        }
+    }
+}

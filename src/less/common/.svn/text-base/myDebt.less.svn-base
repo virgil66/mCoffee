@@ -1,0 +1,29 @@
+@import (reference) '../lib/bracket.less';
+
+list {
+	.columns {
+		height: rem(60);
+	}
+}
+
+.my-loan-num {
+	color: @cl_44;
+	font-size: 16px;
+	letter-spacing: 0;
+	line-height: rem(22.5);
+	.my-loan-yen {
+		margin-right: rem(5);
+	}
+}
+.my-loan-time {
+	color: @cl_88;
+	font-size: 12px;
+	letter-spacing: 0;
+	line-height: rem(14);
+}
+.item-after {
+	color: @cl_66;
+	font-size: 15px;
+	letter-spacing: rem(-0.36);
+	line-height: rem(18);
+}

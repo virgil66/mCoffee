@@ -1,0 +1,35 @@
+@import (reference) '../lib/bracket.less';
+@import "identifyVerification";
+@import "completeInformation";
+
+.start-time,
+.end-time {
+	width: 100%;
+	border: none;
+	outline:none; 
+	-webkit-appearance:none; 
+	appearance:none;
+}
+
+.item-after {
+	.form-field {
+		padding: 0 !important;
+	}
+	.form-field {
+		color: @cl_44;
+		font-size: 16px;
+		letter-spacing: 0;
+		line-height: rem(22.5);
+	}
+	.form-field::placeholder {
+		color: @cl_99;
+	}
+}
+
+.item-title.column {
+	color: @cl_66;
+}
+
+i.icon.icon-form-checkbox {
+	vertical-align: text-bottom;
+}

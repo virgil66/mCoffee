@@ -1,0 +1,94 @@
+@import (reference) '../lib/bracket.less';
+
+.main-card {
+  background-color: #fff;
+  border-radius: 5px;
+  // overflow: hidden;  
+}
+
+.card-header {
+  text-align: center;
+  border-bottom: dashed #E5E5E5 1px;
+  position: relative;
+  span.card-title {
+    line-height: rem(60);
+    vertical-align: middle;
+    font-size: 16px;
+    color: @cl_66;
+  }
+  span.label-icon {
+    .background();
+    width: rem(100);
+    height: rem(26);
+    display: inline-block;
+    line-height: rem(26);
+    vertical-align: middle;
+    position: absolute;
+    left: -2px;
+    top: 50%;
+    margin-top: rem(-13);
+    font-size: 12px;
+    color: #fff;
+    background-image: url(../images/label_rectangle.png);
+    .wrap {
+      width: rem(90);
+      height: rem(26);
+      display: inline-block;
+      float: left;
+    }
+  }
+  span.label-icon.warning-icon {
+    background-image: url(../images/label_rectangle_warning.png);
+  }
+}
+.over-due-title {
+  color: #FA3B3B !important;
+}
+.is-over-due {
+  display: none !important;
+}
+.over-due-hide {
+  display: none;
+}
+.handleRepaySchedule,
+.handleLoanContract {
+  color: #137BD7 !important;
+  text-decoration: underline;
+}
+
+.card-body {
+  padding: rem(16) rem(15);
+  font-size: 14px;
+  .label {
+    color: @cl_66;
+    width: rem(120);
+    max-width: 120px;
+  }
+  .summary {
+    color: @cl_44;
+    flex: 1;
+  }
+  .columns {
+    margin-bottom: rem(14);
+  }
+  .columns:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.loan-record-border {
+  border-bottom: dashed #E5E5E5 1px;
+}
+
+.loan-record {
+  .column.label.is-one-thirds,
+  .column.summary.is-two-thirds {
+    color: @cl_99;
+  }
+  .debr-evidence {
+    display: inline-block;
+    margin: 0 auto;
+    color: @cl_99;
+    font-size: 16px;
+  }
+}

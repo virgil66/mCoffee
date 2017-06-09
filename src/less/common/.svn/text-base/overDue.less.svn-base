@@ -1,0 +1,123 @@
+@import (reference) '../lib/bracket.less';
+
+.box-overdue {
+	padding: rem(10);
+	.box-overdue-border {
+		width: 100%;
+		margin-top: rem(-8);
+	}
+}
+.box-overdue-container {
+	background-color: @cl_00;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.10);
+	margin: 0 rem(2);
+	border-top-left-radius: rem(10);
+	border-top-right-radius: rem(10);
+}
+
+.box-overdue-button {
+	padding: rem(30) rem(10);
+	border-top: 1px solid @cl_f1;
+}
+
+.box-overdue-content {
+	height: rem(187);
+	border-bottom: 1px dashed @cl_f1;
+}
+
+.box-content-num {
+	text-align: center;
+	color: @cl_44;
+	font-size: 48px;
+	line-height: rem(48);
+	letter-spacing: rem(-0.58);
+	margin-bottom: rem(18);
+	.box-content-yen {
+		font-size: 24px;
+		line-height: rem(25);
+		letter-spacing: rem(-0.58);	
+	}
+}
+.box-content-rate {
+	text-align: center;
+	color: @cl_99;
+	font-size: 12px;
+	letter-spacing: rem(-0.29);
+	line-height: rem(14);
+	i {
+		font-style: normal;
+	}
+}
+
+.box-content-title {
+	display: block;
+	text-align: center;
+	padding: rem(29.5) 0 rem(9.5) 0;
+	.box-overdue-day {
+		vertical-align: middle;
+	}
+	.box-overdue-day {
+		color: #fb3b3b;
+		font-size: 14px;
+		letter-spacing: rem(-0.34);
+		line-height: rem(17);
+		&:before {
+			display: inline-block;
+			content: "";
+			width: rem(20);
+			height: rem(20);
+			background-image: url(../images/warning_icon.png);
+			background-size: contain;
+			vertical-align: bottom;
+			margin-right: rem(6);
+		}
+	}
+}
+.box-overdue-list {
+	margin: 0 rem(2);
+	list {
+		padding: 0;
+		height: rem(60);
+		.columns {
+			padding-left: rem(10);
+			padding-right: rem(10);
+		}
+	}
+}
+
+.box-list-lt {
+	.box-list-lt-num {
+		color: @cl_44;
+		font-size: 14px;
+		letter-spacing: 0;
+		line-height: rem(22.5);
+		i {
+			font-style: normal;
+		}
+	}
+	.box-list-lt-time {
+		color: @cl_88;
+		font-size: 12px;
+		letter-spacing: 0;
+		line-height: rem(14);
+	}
+}
+.box-list-rt {
+	.box-list-rt-warning {
+		text-align: right;
+		color: #ff4646;
+		font-size: 14px;
+		letter-spacing: 0;
+		line-height: rem(22.5);
+	}
+	.box-list-rt-rate {
+		text-align: right;
+		color: @cl_88;
+		font-size: 12px;
+		letter-spacing: 0;
+		line-height: rem(14);
+		i {
+			font-style: normal;
+		}
+	}
+}

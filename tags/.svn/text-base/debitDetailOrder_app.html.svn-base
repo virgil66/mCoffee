@@ -1,0 +1,251 @@
+<debitDetailOrder>
+	<div class="main-container">
+        <div class="main-card">
+          <div class="card-header">
+            <span class="card-title">
+              <span class="{label-icon:true,warning-icon:isWarning,is-over-due:isOverDue}" if={board.loanStatus}>
+                <span class="wrap"><span>{ formatStatus(board.loanStatus) }</span></span>
+              </span>
+              <span class="loan-detail-list">借款详单</span>
+            </span>
+          </div>
+          <div class="card-body loan-record-border" if={ flag }>
+            <div class="loan-record">
+              <div class="{columns:true,over-due-hide:overDueHide}">
+                <div class="{column:true,label:true,over-due-title:overDueFlag}">逾期应还</div>
+                <div class="{column:true,summary:true,over-due-title:overDueFlag}">&yen;{ board.overdueRepayAmt }</div>
+              </div>
+              <div class="columns">
+                <div class="column label">本期应还</div>
+                <div class="column summary">&yen;{ board.currentRepayAmt }</div>
+              </div>
+              <div class="columns">
+                <div class="column label">未还总金额</div>
+                <div class="column summary">&yen;{ board.needRepayTatola }</div>
+              </div>
+              <div class="columns">
+                <div class="column label">本期期数/总期数</div>
+                <div class="column summary">{ board.currentPeriod }/{ board.repayPeriod }</div>
+              </div>
+              <div class="columns">
+                <span class="debr-evidence">借据</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" if={board}>
+            <div class="columns">
+              <div class="column label">借款金额</div>
+              <div class="column summary">&yen;{ board.loanAmt }</div>
+            </div>
+            <div class="columns">
+              <div class="column label">收款账户</div>
+              <div class="column summary">{ board.account }</div>
+            </div>
+            <div class="columns">
+              <div class="column label">日利率</div>
+              <div class="column summary">{ board.rate }%</div>
+            </div>
+            <div class="columns">
+              <div class="column label">起止时间</div>
+              <div class="column summary">{ formatDate(board.firstRepayDate) }-{ formatDate(board.endRepayDate) }</div>
+            </div>
+            <div class="columns">
+              <div class="column label">首次还款日</div>
+              <div class="column summary">{ formatDate(board.firstRepayDate) }</div>
+            </div>
+            <div class="columns">
+              <div class="column label">借款人姓名</div>
+              <div class="column summary">{ board.fullName }</div>
+            </div>
+            <div class="columns">
+              <div class="column label">借款人身份证</div>
+              <div class="column summary">{ board.idNo }</div>
+            </div>
+            <div class="columns">
+              <div class="column label">还款日</div>
+              <div class="column summary">每月{ board.repayDateStr }日</div>
+            </div>
+            <div class="columns" if={ planFlag }>
+              <div class="column label">还款计划</div>
+              <div class="column summary handleRepaySchedule" onClick={ handleRepaySchedule }>查看</div>
+            </div>
+            <div class="columns">
+              <div class="column label">借款期限</div>
+              <div class="column summary">{ board.repayPeriod }个月</div>
+            </div>
+            <div class="columns">
+              <div class="column label">借款用途</div>
+              <div class="column summary">{ board.loanUsage }</div>
+            </div>
+            <div class="columns">
+              <div class="column label">还款银行卡</div>
+              <div class="column summary">{ board.account }</div>
+            </div>
+            <div class="columns">
+              <div class="column label">贷款发放人</div>
+              <div class="column summary">{ board.loanPrivider }</div>
+            </div>
+            <div class="columns">
+              <div class="column label">借款合同</div>
+              <div class="column summary handleLoanContract" onClick={ handleLoanContract }>查看</div>
+            </div>
+          </div>
+        </div>
+    </div>
+	<script>
+  	var self = this;
+  	this.flag = false;
+  	this.board;
+  	var isWarning = false;
+  	var overDueFlag = false;
+  	var overDueHide = true;
+  	var isOverDue = false;
+    var planFlag = true;
+
+  	formatStatus(str) {
+      var loanStatus = "";
+      switch(str) {
+        case "01": {
+          loanStatus = "还款处理中";
+          break;
+        }
+        case "02": {
+          loanStatus = "已结清";
+          break;
+        }
+        case "03": {
+          loanStatus = "逾期";
+          break;
+        }
+        case "04": {
+          loanStatus = "还款中";
+          break;
+        }
+        case "05": {
+          loanStatus = "转让";
+          break;
+        }
+        case "06": {
+          loanStatus = "放款失败";
+          break;
+        }
+        case "07": {
+          loanStatus = "放款中";
+          break;
+        }
+        default: {
+          loanStatus = "";
+          break;
+        }
+      }
+      return loanStatus;
+  	}
+  	formatDate(date) {
+    	var date = date.replace(/\//g, ".");
+    	return date;
+  	}
+
+    handleRepaySchedule() {
+      var loanId = this.board.loanId;
+      nativeJS.rePayPlanList(loanId);
+    }
+    handleLoanContract() {
+      // var loanId = this.board.loanId;
+      // nativeJS.contractRelatedProtocol();
+      var protType = "T004";
+      var title = "合同及相关协议";
+      var protObj = {
+        "protType": protType,
+        "title": title
+      };
+      var protStr = JSON.stringify(protObj);
+      nativeJS.clickProtocol(protStr);
+    }
+
+  	window.debitDetailOrder = function(jsonObjStr) {
+    	var jsonObj = JSON.parse(jsonObjStr);
+    	// 0-首页我的借款列表点击进入 1-借款记录列表点击进入
+    	var flag = (jsonObj.flag == 1) ? true : false;
+
+    	if(jsonObj.loanStatus) {
+    		self.update({
+    			isOverDue: false
+    		})
+    	}else {
+    		self.update({
+    			isOverDue: true
+    		})
+    	}
+
+    	self.update({
+      		board: jsonObj,
+      		flag: flag
+    	});
+
+
+      if(jsonObj.loanStatus == "02" || jsonObj.loanStatus == "07") {
+        self.update({
+          planFlag: false
+        })
+      } else {
+        self.update({
+          planFlag: true
+        })
+      }
+      
+
+    	if(flag) {
+    		if(jsonObj.loanStatus == "03") {
+    			self.update({
+    				isWarning: true,
+    				overDueFlag: true,
+    				overDueHide: false
+    			})
+    		}else {
+    			self.update({
+    				isWarning: false,
+    				overDueFlag: false,
+    				overDueHide: true
+    			})
+    		}
+
+        if(jsonObj.loanStatus == "02") {
+          self.update({
+            flag: false
+          })
+        } else {
+          self.update({
+            flag: true
+          })
+        }
+    	}else {
+        if(jsonObj.loanStatus == "03") {
+          self.update({
+            isWarning: true
+          })
+        }else {
+          self.update({
+            isWarning: false
+          })
+        }
+      }
+  	}
+	//加载
+	this.on('mount', function(){
+    nativeJS.onPageFinish();
+	})
+
+  this.on('updated', function(){
+    if(!this.flag) {
+      $('.loan-detail-list').text("借据");
+    }else {
+      $('.loan-detail-list').text("借款详单");
+    }
+  })
+
+  // var debitdetail = {"flag":"1","idNo":"513423198709248122","currentPeriod":"","overdueRepayAmt":"","loanUsage":"个人日常消费","repayDateStr":"15","firstRepayDate":"2017-06-15","repayPeriod":"","endRepayDate":"","loanAmt":1000.0,"rate":4.35,"loanStatus":"","loanPrivider":"华通银行","needRepayTatola":"","account":"null 7417","loanDate":"2017-04-29","fullName":"美羊羊","currentRepayAmt":"","loanId":"482687d2d49944218774f804036e7dbd"}
+  // var jsonStr = JSON.stringify(debitdetail);
+  // debitDetailOrder(jsonStr)
+
+</script>
+</debitDetailOrder>

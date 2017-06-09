@@ -1,0 +1,358 @@
+@import (reference) '../lib/bracket.less';
+@import "debitDetailOrder";
+
+.box-white {
+  padding: rem(10);
+  >img {
+  	width: 100%;
+	  margin-top: rem(-8);
+  }
+}
+.box-white-container {
+  height: auto;
+  background-color: @cl_00;
+  box-shadow: 0 4px 2px 0 rgba(204,204,204,0.90);
+  border-top-left-radius: rem(10);
+  border-top-right-radius: rem(10);
+  margin-left: rem(2);
+  margin-right: rem(2);
+}
+.box-white-body {
+  padding: 0 rem(10);
+  background-color: @cl_00;
+  border-top-left-radius: rem(10);
+  border-top-right-radius: rem(10);
+}
+.box-white-label {
+  display: block;
+  text-align: center;
+  padding: rem(30) 0 rem(20);
+  .box-label-content {
+    color: @cl_44;
+    font-size: 14px;
+    letter-spacing: rem(-0.34);
+    line-height: rem(17);
+  }
+}
+.box-loan-content {
+  display: flex;
+  width: rem(240);
+  margin: 0 auto;
+  padding: 0 0 rem(2) rem(15);
+  border-bottom: 2px solid @cl_f1;
+}
+.box-loan-number {
+  width: 100%;
+  color: @cl_44;
+  font-size: 32px;
+  line-height: rem(50);
+  appearance: none;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+.box-loan-rate {
+  text-align: center;
+  color: @cl_88;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: rem(17);
+  margin: rem(28) 0;
+  margin-bottom: 0;
+}
+.box-white-button {
+  padding: rem(30) rem(10);
+}
+
+.box-loan-sign {
+  margin-right: rem(15);
+  .box-sign-yen {
+    display: inline-block;
+    margin-top: rem(16);
+    color: @cl_44;
+    font-size: rem(24);
+    letter-spacing: rem(-0.58);
+    line-height: rem(25);
+  }
+}
+
+.box-stage {
+  line-height: rem(28);
+  vertical-align: middle;
+  padding: rem(25) rem(12);
+  // padding-bottom: 0;
+  font-size: 14px;
+  .is-one-third,
+  .is-full {
+    color: #666;
+  }
+  .is-two-third {
+    text-align: left;
+  }
+}
+
+.section-stage {
+  background-color: @cl_00;
+  padding-top: rem(25);
+  list {
+    height: rem(50);
+    padding-left: 0;
+    padding-right: 0;
+    background-color: @cl_00;
+    > .columns {
+      border-top: 1px solid #f1f1f1;
+      border-bottom: 1px solid #f1f1f1;
+      .container();
+    }
+  }
+}
+.item-title.column.is-one-third,
+.item-title.column.is-two-third {
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: rem(17);
+}
+
+.box-card-box{
+  padding: 0;
+  .columns {
+    padding: 0;
+  }
+}
+
+.box-card {
+  list {
+    height: rem(50);
+    // background-color: @cl_f1;
+    background-color: @cl_00;
+    border-bottom: 1px solid @cl_f1;
+    .item-title.column.is-one-third {
+      width: auto;
+      color: @cl_44;
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+  }
+  .columns {
+    border: 0;
+  }
+}
+.box-card-label {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  color: @cl_44;
+  letter-spacing: 0;
+  line-height: rem(19);
+  padding: rem(15) 0;
+  // border-top: 1px solid @cl_f1;
+  border-bottom: 1px solid @cl_f1;
+}
+.box-card-tail {
+  padding: rem(20) rem(16);
+  .clearfix;
+  .box-tail-tips {
+    display: inline-block;
+    float: left;
+    color: @cl_88;
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+  .box-card-list {
+    display: inline-block;
+    float: right;
+    color: #137bd7;
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+}
+
+.box-vertify {
+  padding: 0;
+  border-top: 1px solid @cl_f1;
+}
+
+.box-vertify-container {
+  padding-bottom: rem(25);
+}
+.box-vertify-label {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  color: @cl_44;
+  letter-spacing: 0;
+  line-height: rem(19);
+  padding: rem(20) 0 0;
+}
+
+.box-vertify-username {
+  width: 100%;
+  // border-bottom: 2px solid @cl_f1;
+  color: @cl_44;
+  font-size: 14px;
+  letter-spacing: (-0.34);
+  // line-height: rem(17);
+  padding: rem(10) rem(16);
+  margin: 0 auto;
+  display: flex;
+}
+
+.box-username{
+  .box-username-first,
+  .name {
+    display: inline-block;
+  }
+  .box-username-first {
+    line-height: rem(14);
+    vertical-align: middle;
+  }
+  .name {
+    width: rem(160);
+    font-size: 14px;
+    border: none;
+    outline: none;
+    vertical-align: middle;
+  }
+  .name::placeholder {
+    font-size: 14px;
+  }
+}
+
+.box-vertify-identify {
+  width: 100%;
+  // border-bottom: 2px solid @cl_f1;
+  color: @cl_44;
+  font-size: 14px;
+  letter-spacing: rem(-0.34);
+  // line-height: rem(17);
+  padding: rem(10) rem(16);
+  margin: 0 auto;
+  display: flex;
+}
+
+.box-identify{
+  .box-identify:first-child {
+    margin-top: rem(3);
+  }
+  .box-identify-code,
+  .identify {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .box-identify-code {
+    line-height: rem(17);
+  }
+  .identify {
+    width: auto;
+    font-size: 14px;
+    border: none;
+    outline: none;
+  }
+  .identify::placeholder {
+    font-size: 14px;
+  }
+}
+
+.main-container {
+  padding: 0 0 rem(25);
+  padding-bottom: 0;
+  .card-body {
+    padding: rem(20) rem(16);
+    padding-bottom: 0;
+  }
+}
+
+.card-header {
+  border: 0;
+  padding-top: rem(20);
+  color: @cl_44;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: rem(19);
+  .label-icon {
+    display: none !important;
+  }
+}
+
+.card-tail {
+  padding: 0 rem(16);
+  color: @cl_66;
+  margin-top: rem(20);  
+  font-size: 14px;
+  .card-tail-news {
+    letter-spacing: 0;
+    line-height: rem(21);
+    >span {
+      color: #137bd7;
+    }
+  }
+}
+
+.box-radius {
+  position: relative;
+  width: 100%;
+  height: rem(12);
+  margin-top: 3px;
+  margin-bottom: 3px;
+  &:before {
+    width: rem(12);
+    height: rem(12);
+    background-color: @cl_f1;
+    content: "";
+    display: inline-block;
+    border-radius: 50%;
+    margin-left: rem(-6);
+  }
+  &:after {
+    float: right;
+    width: rem(12);
+    height: rem(12);
+    background-color: @cl_f1;
+    content: "";
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: rem(-6);
+  }
+  .box-radius-line {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed @cl_f1;
+    margin-top: 1px;
+  }
+}
+
+.sawtooth {
+  width: 100%;
+  margin-top: rem(-4);
+}
+
+.bank-icon {
+  width: rem(20);
+  height: rem(20);
+  background-size: contain;
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+.arrow-area {
+  height: rem(20);
+  line-height: rem(20);
+  vertical-align: middle;
+  text-align: center;
+  i {
+    display: inline-block;
+    .background();
+    background-image: url("../images/more_icon.png");
+    height: 8px;
+    width: 13px;
+    &.reverse {
+      transform:rotate(180deg);
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}

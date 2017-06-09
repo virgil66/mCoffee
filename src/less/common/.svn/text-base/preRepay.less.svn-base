@@ -1,0 +1,116 @@
+@import (reference) '../lib/bracket.less';
+
+body {
+	background: @cl_f1;
+}
+
+.box-forward {
+	padding: rem(10);
+	.box-forward-border {
+		width: 100%;
+		margin-top: rem(-8);
+	}
+}
+
+.box-forward-body {
+	background: @cl_00;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,.1);
+	border-top-left-radius: rem(10);
+	border-top-right-radius: rem(10);
+	padding-bottom: rem(22);
+	margin: 0 rem(2);
+	.box-forward-btn {
+		padding: rem(10);
+	}
+	.box-forward-tail {
+		position: absolute;
+		left: 0;
+		bottom: rem(-24);
+		width: 100%;
+		height: rem(24);
+		background: url(../images/sawtooth_icon.png) left top no-repeat transparent;
+		background-size: contain;
+	}
+}
+
+item,.box-forward-item {
+	height: rem(60);
+	display: flex;
+	align-items: center;
+	padding: rem(12) rem(10);
+	border-bottom: 1px solid @cl_f1;
+	key-item {
+		flex:1;
+		display: flex;
+		checkbox {
+			margin-right: rem(10);
+			display: flex;
+	    	align-items: center;
+		}
+		.box-lend-num {
+			color: @cl_44;
+			font-size: 14px;
+			letter-spacing: 0;
+			line-height: rem(22.5);
+		}
+		.box-lend-time {
+			color: @cl_88;
+			font-size: 12px;
+			letter-spacing: 0;
+			line-height: rem(14);
+		}
+	}
+	.box-forward-repay {
+		color: @cl_66;
+		font-size: 14px;
+		letter-spacing: rem(-0.34);
+		line-height: rem(17);
+		text-align: right;
+		>span {
+			letter-spacing: rem(-0.34);
+			line-height: rem(17);
+			display: inline-block
+		}
+		i {
+			font-style: normal;
+		}
+	}
+}
+.box-forward-all {
+	.box-forward-item();
+	height: rem(68);
+	padding: rem(16) rem(10);
+	.box-lend-num {
+		color: @cl_66;
+		font-size: 16px;
+		letter-spacing: rem(-0.39);
+		line-height: rem(19);
+	}
+	.box-forward-repay {
+		span.box-repay-amount {
+			display: inline-block;
+			color: @cl_44;
+			font-size: 24px;
+			letter-spacing: rem(-0.58);
+			line-height: rem(25);
+			padding-top: rem(2);
+		}
+	}
+}
+.box-forward-item:last-child {
+	border-bottom: 0;
+}
+
+.hint-area {
+	padding: rem(20);
+	padding-right: rem(12);
+	h4 {
+		font-size: 14px;
+		margin-bottom: 6px;
+	}
+	p {
+		line-height: 20px;
+		vertical-align: middle;
+		margin-bottom: 4px;
+	}
+}

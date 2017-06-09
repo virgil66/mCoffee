@@ -1,0 +1,58 @@
+@import (reference) '../lib/bracket.less';
+
+html, body {
+	background: #fff;
+}
+.borrow-requirement {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	height: auto;
+	.borrow-requirement-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+		opacity: .4;
+	}
+	.borrow-requirement-content {
+		position: relative;
+		margin: 0 auto;
+		background-color: @cl_00;
+		width: 100%;
+		padding: 15px;
+	}
+}
+
+.borrow-requirement-items {
+	margin-bottom: 16px;
+	.borrow-items-title {
+		color: @cl_44;
+		font-size: 15px;
+		letter-spacing: -0.09px;
+		line-height: 18px;
+		margin-bottom: 4px;
+		.small-dot.dot-mr {
+			margin-right: 8px;
+		}
+	}
+	.borrow-items-info {
+		color: @cl_66;
+		font-size: 13px;
+		letter-spacing: -0.08px;
+		line-height: 18px;
+	}
+	.borrow-hide {
+		display: none;
+	}
+}
+
+.apply-state {
+	color: @cl_44;
+	font-size: 15px;
+	letter-spacing: -0.09px;
+	line-height: 18px;
+	margin-bottom: 4px;
+}

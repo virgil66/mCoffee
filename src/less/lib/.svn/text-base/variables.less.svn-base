@@ -1,0 +1,12 @@
+// * default settings
+@designWidth: 375;
+@theme-color: #137BD7;
+@deep-theme-color: #4681B5;
+@cl_00: #ffffff;
+@cl_44: #444444;
+@cl_99: #999999;
+@cl_66: #666666;
+@cl_e5: #e5e5e5;
+@cl_88: #888888;
+@cl_f1: #f1f1f1;
+@red: #FF4646;

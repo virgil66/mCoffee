@@ -1,0 +1,27 @@
+@import (reference) '../lib/bracket.less';
+
+.item-title.column {
+	color: @cl_44;
+	font-size: 16px;
+	letter-spacing: 0;
+	line-height: rem(22.5);
+	white-space: normal;
+}
+.item-after {
+	color: @cl_66;
+	font-size: 15px;
+	letter-spacing: rem(-0.36);
+	line-height: rem(18);
+	.form-field {
+		font-size: 16px;
+		letter-spacing: 0;
+		line-height: rem(19);
+	}
+	.form-field::placeholder {
+		font-size: 16px;
+	}
+}
+
+#user-address {
+	// overflow-y: auto;
+}

@@ -1,0 +1,210 @@
+@import (reference) '../lib/bracket.less';
+
+.main-card {
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  .card-header {
+    border-bottom: dashed #E5E5E5 1px;
+  }
+  .card-title {
+    padding-top: rem(15);
+    padding-bottom: rem(15);
+    color: @cl_66;
+    font-size: 14px;
+    text-align: center;
+    padding-left: rem(14);
+    padding-right: rem(14);
+  }
+  .show-bar {
+    padding: rem(10) rem(20);
+    padding-bottom: 0;
+    line-height: 0;
+    position: relative;
+    z-index: 20;
+    .dot {
+      width: rem(10);
+      height: rem(10);
+      background-color: #E5E5E5;
+      border-radius: 50%;
+      display: inline-block;
+    }
+  }
+  .show-title {
+    padding-left: rem(14);
+    padding-right: rem(14);
+    margin-bottom: rem(18);
+    font-size: 12px;
+    color: @cl_66;
+    &.top {
+      margin-bottom: rem(6);
+    }
+  }
+}
+
+.show-bar-line {
+  // margin-top: rem(-9);
+  /* 18/2 + 10 = 19 */
+  // padding-bottom: rem(19);
+
+  margin-top: rem(-5);
+  padding-bottom: rem(15);
+  padding-left: rem(20);
+  padding-right: rem(20);
+  .column {
+    min-height: 1px;
+    border-bottom:solid 1px #e5e5e5;
+    height: 1px;
+    position: relative;
+    &.passed {
+      border-color: @theme-color;
+      position: relative;
+    }
+  }
+}
+/*
+.red-theme .show-bar-line .column.passed {
+    border-color: @red;
+}
+*/
+.show-bar-line {
+  .dot.current {
+      content: "";
+      display: block;
+      background-image: url("../images/hintdot@3x.png");
+      .background();
+      height: rem(18);
+      width: rem(18);
+      position: absolute;
+      // left: rem(-5);
+      // right: 0;
+      right: rem(-9);
+      top: rem(-9);
+      z-index: 100;
+      >.hint-text {
+        position: absolute;
+        top:100%;
+        // width: rem(90);
+        width: auto;
+        /*90/2 - 18/2 - */
+        left: rem(-36);
+        margin-right: rem(3);
+        text-align: center;
+        padding-top: rem(5);
+        white-space: nowrap;
+        &.left {
+          right: auto;
+          left: 0;
+        }
+        &.right {
+          right: 0;
+          left: auto;
+        }
+      }
+  }
+
+}
+
+.red-theme {
+  .show-bar-line .dot.current {
+    background-image: url("../images/hintdotred@3x.png");
+  }
+}
+
+.hint-text {
+  color: @theme-color;
+}
+
+.red-theme .hint-text {
+  color: @red;
+}
+
+.card-body {
+  .order {
+  	margin-right: rem(10);
+  }
+}
+
+/* theme */
+.main-card .show-bar {
+  .column {
+    position: relative;
+  }
+  .dot {
+    &.passed {
+      background-color: @theme-color;
+      position: relative;
+      right: 1px;
+    }
+    &.runtime {
+      background-image: url("../images/hintdot@3x.png");
+      .background();
+      height: rem(18);
+      width: rem(18);
+      position: absolute;
+      top: rem(-9);
+      left: 0;
+    }
+  }
+}
+.main-card .show-title {
+  .column.runtime {
+    color:  @theme-color;
+  }
+}
+.card_list .columns.runtime {
+  color: @theme-color;
+}
+
+/* red theme */
+.main-card.red-theme .show-bar {
+  .dot {
+    margin-bottom: -1px;
+    // &.passed {
+    //   background-color: @red;
+    // }
+    &.runtime {
+      background-image: url("../images/hintdotred@3x.png");
+      .background();
+      height: rem(18);
+      width: rem(18);
+    }
+  }
+}
+
+.main-card.red-theme {
+  .show-title {
+    .column.runtime {
+      color:  @red;
+    }
+  }
+  .card_list .columns.runtime {
+    color: @red;
+  }
+}
+
+.theme-color {
+  color: @theme-color;
+}
+.red-theme .theme-color {
+  color: @red;
+}
+
+.card_list>.columns.light {
+  color: #999;
+}
+
+.show-title .hidden {
+  visibility: hidden;
+}
+
+.over-repay {
+  font-size: 12px;
+}
+
+/* 只有一期 */
+#sinlgeDot {
+  left: auto;
+  right: 0;
+  margin-left: rem(-9);
+}

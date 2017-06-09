@@ -1,0 +1,565 @@
+<app>
+    <div class="box-white-container">
+        <div class="box-white-body">
+            <label class="box-white-label">
+                <span class="box-label-content">我要借</span>
+            </label>
+            <div class="box-loan">
+                <div class="box-loan-content">
+                    <div class="box-loan-sign"><span class="box-sign-yen">&yen;</span></div>
+                    <div class="box-loan-input" if={ step==0 }>
+                        <input type="tel" name="loan" class="box-loan-number" onKeydown={ watchstate } onKeyup={ watchman }/>
+                    </div>
+                    <div class="box-loan-input" if={ step> 0}>
+                        <input type="tel" name="loan" class="box-loan-number" value={userInput} disabled/>
+                    </div>
+                </div>
+            </div>
+            <div class="box-loan-rate">
+                按日计息，日利率：<span>{currentrate}%</span>
+            </div>
+        </div>
+        <div class="section-stage" if={ showInfo }>
+            <list onClick={ handleSelect }>
+                <div class="columns">
+                    <div class="item-title column is-one-third">分期期数</div>
+                    <div class="item-title column is-two-third">{ number }个月</div>
+                    <div class="item-after" if={ (step==0) }>
+                    </div>
+                </div>
+            </list>
+            <div class="box-stage" if={ describe }>
+                <div class="columns">
+                    <div class="column is-one-third">
+                        首次还款
+                    </div>
+                    <div class="column is-two-third">
+                        &yen;{ describe.firstRepayAmt } ({ describe.firstRepayDay })
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-one-third">
+                        还款日
+                    </div>
+                    <div class="column is-two-third">
+                        每月{ describe.repayDay }日
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-one-third">
+                        还款详情
+                    </div>
+                    <div class="column is-two-third">
+                        <span class="link" onClick={ overview }>查看</span>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-full">
+                        次日起即可提前还款,仅按日收取借期利息
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div if={ (step>= 1) }>
+            <div class="box-radius">
+                <div class="box-radius-line"></div>
+            </div>
+            <list class="box-card-box">
+                <div class="columns">
+                    <div class="item-title column">
+                        <div class="box-card">
+                            <label class="box-card-label"><span>收款银行卡</span></label>
+                            <list onClick={ handleBank }>
+                                <div class="columns">
+                                    <div class="item-title column is-one-third">
+                                        <span class="bank-icon" style="background-image: url({ bankInfo.url }); "></span>
+                                        {bankInfo.bankName} {bankInfo.bankType} ({bankInfo.lastNumber})
+                                    </div>
+                                    <div class="item-after" if={ (bankCanSelected && step==1) }>
+                                    </div>
+                                </div>
+                            </list>
+                            <div class="box-card-tail">
+                                <div class="box-tail-tips">每月{ describe.repayDay }日凌晨从此卡自动扣款</div>
+                                <div class="box-card-list" onClick={ overviewBank }>查看支持银行</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </list>
+        </div>
+        <div if={ (step==2) }>
+            <list class="box-vertify" if= { needCheck }>
+                <div class="columns">
+                    <div class="item-title column">
+                        <div class="box-vertify-container">
+                            <label class="box-vertify-label"><span>身份核实</span></label>
+                            <div class="box-vertify-username">
+                                <div class="box-username">
+                                    <span class="box-username-first">{ debitDetail.familyName }</span>
+                                </div>
+                                <div class="box-username">
+                                    <input type="text" onKeyup={ confirmName} placeholder="补全你的名字" class="name" />
+                                </div>
+                            </div>
+                            <div class="box-vertify-identify">
+                                <div class="box-identify">
+                                    <span class="box-identify-code">{ debitDetail.bankCardPrePart }</span>
+                                </div>
+                                <div class="box-identify">
+                                    <input type="text" onKeydown={ watchIdentify } onKeyup={ confirmIdentify } placeholder="补全身份证后四位" class="identify" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </list>
+            <div class="main-container">
+                <div class="main-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            借款详单
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="columns">
+                            <div class="column label is-one-thirds">借款金额</div>
+                            <div class="column summary is-two-thirds">&yen;{ debitDetail.loadAmt }</div>
+                        </div>
+                        <div class="columns">
+                            <div class="column label is-one-thirds">收款账户</div>
+                            <div class="column summary is-two-thirds">{ debitDetail.accessAccount }</div>
+                        </div>
+                        <div class="columns">
+                            <div class="column label is-one-thirds">贷款利率</div>
+                            <div class="column summary is-two-thirds">{ debitDetail.loanRate }%</div>
+                        </div>
+                        <div class="columns">
+                            <div class="column label is-one-thirds">起止时间</div>
+                            <div class="column summary is-two-thirds">{ debitDetail.startTime }--{ debitDetail.endTime }</div>
+                        </div>
+                        <!-- <div class="columns">
+                            <div class="column label is-one-thirds">结束时间</div>
+                            <div class="column summary is-two-thirds">{ debitDetail.endTime }</div>
+                        </div> -->
+                        <div class="columns">
+                            <div class="column label is-one-thirds">首次还款日</div>
+                            <div class="column summary is-two-thirds">{ debitDetail.firstRepayDay }</div>
+                        </div>
+                        <!-- <div if={needCheck}> -->
+                          <!-- 显示箭头 -->
+                        <div class="arrow-area" id="getMore" onClick={ toggleDetail } if={needCheck} >
+                          <i class="get-more-icon"></i>
+                        </div>
+                        <!-- if= { debitTrailDetail } -->
+                        <div id="tDetail" class={hidden:needCheck}>
+                          <div class="columns">
+                              <div class="column label is-one-thirds">借款人姓名</div>
+                              <div class="column summary is-two-thirds">
+                                <span if={ (!needCheck) }>{ debitTrailDetail.fullName }</span>
+                                <span if={ needCheck }>{ debitDetail.familyName }</span>
+                              </div>
+                          </div>
+                          <div class="columns">
+                              <div class="column label is-one-thirds">借款人身份证</div>
+                              <div class="column summary is-two-thirds">
+                                <span if={ (!needCheck) }>{ debitTrailDetail.idNo }</span>
+                                <span if={ needCheck }>{ debitDetail.bankCardPrePart }</span>
+                              </div>
+                          </div>
+                          <div if={ (!needCheck) }>
+                              <div class="columns">
+                                  <div class="column label is-one-thirds">还款日</div>
+                                  <div class="column summary is-two-thirds">每月{debitTrailDetail.repayDay}日</div>
+                              </div>
+                              <div class="columns">
+                                  <div class="column label is-one-thirds">借款期限</div>
+                                  <div class="column summary is-two-thirds">{debitTrailDetail.repayPeriod}个月</div>
+                              </div>
+                              <div class="columns">
+                                  <div class="column label is-one-thirds">借款用途</div>
+                                  <div class="column summary is-two-thirds">{debitTrailDetail.purpose}</div>
+                              </div>
+                              <div class="columns">
+                                  <div class="column label is-one-thirds">还款银行卡</div>
+                                  <!-- 还款卡号描述 -->
+                                  <div class="column summary is-two-thirds">{debitTrailDetail.repayAccount}</div>
+                              </div>
+                              <div class="columns">
+                                  <div class="column label is-one-thirds">贷款发放人</div>
+                                  <div class="column summary is-two-thirds">{debitTrailDetail.loanLender}</div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class={card-tail:true,hidden:needCheck}>
+                        <p class="card-tail-news">请仔细阅读本借据信息，点击确认借钱表示您同意遵守<span onClick={ overviewContract }>《合同及相关协议》</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-white-button">
+            <div class="submit-btn" onClick={ handleNext } if={ canNext() }>下一步</div>
+            <div class="submit-btn disabled" if={ cannotNext() }>下一步</div>
+            <div class="submit-btn disabled" onClick={ handleSubmit } if={ (step==2 && needCheck) }>确认借款</div>
+            <div class="submit-btn" onClick={ handleSubmit } if={ (step==2 && (!needCheck)) }>确认借款</div>
+        </div>
+    </div>
+    <img src="assets/images/sawtooth_icon.png" alt="" class="sawtooth" />
+    <script>
+        this.showInfo = false;
+        this.step = 0;
+        this.maxCountLimit;
+
+        var self = this;
+
+        function baseValidate(count) {
+            if (count < 500) {
+                tip = $.tips({
+                    content: '单笔借款金额需不低于¥500',
+                    stayTime: 2000
+                });
+                return false;
+            } else if (count % 100 != 0) {
+                tip = $.tips({
+                    content: '借款金额需为100的整数倍',
+                    stayTime: 2000
+                });
+                return false;
+            }
+            // else if (count > 40000) {
+            //   tip = $.tips({
+            //       content: '单笔借款金额需不高于¥40000',
+            //       stayTime: 2000
+            //   });
+            //   return false;
+            // }
+        }
+        toggleDetail() {
+          $("#getMore").hide();
+          $(".card-tail").removeClass("hidden");
+          $("#tDetail").removeClass("hidden");
+        }
+        scrollBottom() {
+          var scroll = $("#page").height()-$(document.window).height();
+          if(scroll>0) {
+            $("body").scrollTop(scroll);
+          }
+        }
+        this.userInput;
+        canNext() {
+            return ((this.step < 2) && this.showInfo)
+        }
+        cannotNext() {
+            return ((this.step < 2) && !this.showInfo)
+        }
+        handleNext() {
+            if (!this.showInfo) {
+                var count = $(".box-loan-number").val();
+                if (!count) {
+                    tip = $.tips({
+                        content: '请先确认金额',
+                        stayTime: 2000
+                    });
+                    return false;
+                } else {
+                    baseValidate(count);
+                }
+                return false;
+            }
+            if (this.step == 0) {
+                var number = $(".box-loan-number").val();
+                this.userInput = number;
+                var isValidate = nativeJS.oneStepCommit(number);
+                return false;
+            } else if (this.step == 1) {
+                var isValidate = nativeJS.twoStepCommit();
+                return false;
+            }
+        }
+        handleSubmit(e) {
+            if(this.needCheck) {
+              if($(e.currentTarget).hasClass("disabled")) {
+                nativeJS.alert("请输入正确的核实身份信息");
+                return false;
+              }
+              var name = $(".name").val();
+              var identify = $(".identify").val();
+              nativeJS.comfirmDebit(name, identify);
+            } else {
+              nativeJS.comfirmDebit('','');
+            }
+        }
+
+        var tip;
+        var startTimer;
+        watchstate(e) {
+            window.clearTimeout(startTimer);
+            if (tip) {
+                $(tip).hide();
+            }
+            if (e.keyCode != 8) {
+                if (e.key == "*" || e.key == "#") {
+                    e.preventDefault();
+                }
+                if (!((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105))) {
+                    e.preventDefault();
+                }
+            };
+        }
+        watchman(e) {
+            e.currentTarget.value=e.currentTarget.value.replace(/\D/g,'');
+            var count = e.currentTarget.value;
+            startTimer = window.setTimeout(function() {
+                var count = parseInt($(".box-loan-number").val());
+                if (count) {
+                    if (count < 500) {
+                        this.update({
+                            showInfo: false
+                        });
+                        //提示
+                        tip = $.tips({
+                            content: '单笔借款金额需不低于¥500',
+                            stayTime: 2000
+                        });
+                        nativeJS.hiderepayPlanModule();
+                    } else if (count % 100 != 0) {
+                        this.update({
+                            showInfo: false
+                        });
+                        //提示
+                        tip = $.tips({
+                            content: '借款金额需为100的整数倍',
+                            stayTime: 2000
+                        });
+                        nativeJS.hiderepayPlanModule();
+                    } else if (count > self.maxCountLimit ) {
+                        this.update({
+                            showInfo: false
+                        });
+                        //提示
+                        tip = $.tips({
+                            content: '借款金额大于可借额度',
+                            stayTime: 2000
+                        });
+                        nativeJS.hiderepayPlanModule();
+                    } else {
+                        this.update({
+                            showInfo: true
+                        });
+                        nativeJS.rePayPlanCalculateRequest(count);
+                    }
+                } else {
+                      this.update({
+                          showInfo: false
+                      });
+                };
+            }.bind(this), 1000);
+        }
+        window.maxLimit = function(maxCountLimit) {
+            self.maxCountLimit = parseInt(maxCountLimit);
+        }
+        var passCode=new Array(48,49,50,51,52,53,54,55,56,57,96,97,98,99,100,101,102,103,104,105,8,13);
+        watchIdentify(e) {
+            // var count = '' + e.currentTarget.value;
+            // if (e.keyCode != 8) {
+            //     if(count.length>=4) {
+            //         e.preventDefault();
+            //     }
+            //     if (e.key == "*" || e.key == "#") {
+            //         e.preventDefault();
+            //     }
+            //     if (!((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode == 88)) {
+            //         e.preventDefault();
+            //     }
+            // };
+            // var code=e.keyCode;
+            // var isContain=false;
+            // for(var i=0;i<passCode.length;i++){
+            //      var c=passCode[i];
+            //      if(code==c){
+            //         isContain=true;
+            //         break;
+            //      }
+            // }
+            // if(code == 88) {
+            //     e.currentTarget.value = e.currentTarget.value + 'X';
+            // }
+            // if(!isContain){
+            //     e.preventDefault();
+            // }
+        }
+        confirmIdentify(e) {
+            // var temp= e.currentTarget.value.replace(/[^Xx0-9]/g,'');
+            // if(e.currentTarget.value!=temp){
+            //     e.currentTarget.value=temp;
+
+            // }
+            if(e.currentTarget.value.length>4){
+                e.currentTarget.value=e.currentTarget.value.substring(0,4);
+            }
+
+            
+            var count = '' + e.currentTarget.value;
+            if(count.length==4) {
+                var name = $(".name").val();
+                if(name) {
+                    $(".submit-btn").removeClass("disabled");
+                }
+            } else {
+                $(".submit-btn").addClass("disabled");
+            }
+        }
+        confirmName(e) {
+          var name = e.currentTarget.value;
+          if(name) {
+            var identify = ''+$(".identify").val();
+            if(identify.length==4) {
+              $(".submit-btn").removeClass("disabled");
+            }
+          } else {
+              $(".submit-btn").addClass("disabled");
+          }
+        }
+        handleBank() {
+            if(this.step!=1) {
+                return false;
+            }
+            if (this.bankCanSelected) {
+                nativeJS.bankCardList("bottom");
+            }
+        }
+        overviewBank() {
+            nativeJS.lookSupportBanks();
+        }
+        overviewContract() {
+            var protType = "T004";
+            var title = "合同及相关协议";
+            var protObj = {
+              "protType": protType,
+              "title": title
+            };
+            var protStr = JSON.stringify(protObj);
+            nativeJS.clickProtocol(protStr);
+        }
+        window.back = function() {
+            self.update({
+                needCheck: true
+            });
+            var step = self.step;
+            if (step > 0) {
+                step --;
+                self.update({
+                    step: step
+                });
+                if(step == 0 ) {
+                  self.update({
+                      showInfo: false
+                  });
+                };
+                self.update({
+                  debitTrailDetail: null,
+                  debitDetailOrder: null
+                });
+                self.update();
+                // $("body").scrollTop(0);
+            } else {
+                nativeJS.close();
+            }
+        };
+
+        /**
+         * 还款详情
+         *
+         */
+        /* 选择分期期数 */
+        handleSelect() {
+            if (this.step == 0) {
+                nativeJS.periodsNumber('bottom');
+            }
+        }
+        /* 还款查看 */
+        overview() {
+            nativeJS.rePayPlanList();
+        }
+        /* 利率 */
+        this.currentrate = '0.05';
+        window.rate = function(rate) {
+            self.update({
+                currentrate: rate
+            });
+        };
+        /* 还款计划描述 */
+        this.number = 10;
+        this.describe;
+        window.rePayPlanDesc = function(jsonObjectStr) {
+            var jsonObj = JSON.parse(jsonObjectStr);
+            self.update({
+                describe: jsonObj
+            });
+            // 还款计划确认时才显示页面
+            self.update({
+                showInfo: true
+            });
+            self.update({
+                number: jsonObj.periodsNumber
+            });
+        };
+        /* 分期期数 */
+        window.periodsNumber = function(str) {
+            self.update({
+                number: str
+            });
+        };
+        /* 选中的银行卡信息 */
+        this.bankInfo;
+        this.bankCanSelected = false;
+        window.bankCardSelected = function(jsonObjectStr) {
+            var jsonObj = JSON.parse(jsonObjectStr);
+            self.update({
+                bankInfo: jsonObj
+            });
+            var canSelected = (jsonObj.isCanChange == 1) ? true : false;
+            self.update({
+                step: 1,
+                bankCanSelected: canSelected
+            });
+            self.scrollBottom();
+        };
+        /* 借款详情单 */
+        this.debitDetail;
+        this.needCheck = true;
+        window.debitDetailOrder = function(jsonObjectStr) {
+            var jsonObj = JSON.parse(jsonObjectStr);
+            self.update({
+                debitDetail: jsonObj
+            });
+            var needCheck = (jsonObj.needCheckID == "01")? true: false;
+            if(needCheck) {
+              $(".submit-btn").addClass("disabled");
+            }
+            self.update({
+                step: 2,
+                needCheck: needCheck
+            });
+            self.scrollBottom();
+        };
+        this.debitTrailDetail;
+        /* 借款详情单已确认信息 */
+        window.debitDetailOrderTrailPart = function(jsonObjectStr) {
+            var jsonObj = JSON.parse(jsonObjectStr);
+            self.update({
+              debitTrailDetail: jsonObj
+            });
+            self.update({
+                needCheck: false
+            });
+            self.scrollBottom();
+        }
+        //加载
+        this.on('mount', function(){
+
+            nativeJS.onPageFinish();
+        })
+    </script>
+</app>

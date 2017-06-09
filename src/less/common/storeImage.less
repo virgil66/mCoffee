@@ -1,0 +1,102 @@
+@import (reference) '../lib/bracket.less';
+
+.store-image {
+	width: 100%;
+	margin-top: 49px;
+}
+
+.swiper-container-horizontal{
+	.swiper-pagination {
+		&.swiper-store-pos {
+			position: relative;
+		}
+		&.swiper-pagination-bullets {
+			bottom: 0;
+			margin-top: rem(10);
+		}
+		.swiper-pagination-bullet {
+			background-color: #999;
+			&.swiper-pagination-bullet-active {
+				background-color: #306989;
+			}
+		}
+	}
+}
+
+.store-container {
+	width: 100%;
+	padding: rem(40) rem(28);
+	.store-content {
+		width: 100%;
+		.store-title {
+			color: #004e7e;
+			font-size: 30px;
+			font-family: 'Microsoft yahei';
+		}
+		.store-txt {
+			margin-top: rem(6);
+			color: #333;
+			font-size: 18px;
+			font-family: 'Microsoft yahei';
+			.store-txt-address {
+				margin-bottom: rem(11);
+				&:before {
+					content: "";
+					display: inline-block;
+					width: 13px;
+					height: 17px;
+					background-image: url(../images/Positioning_blue.png);
+					background-size: 100% 100%;
+					margin: rem(4) rem(11) 0 0;
+				}
+			}
+			.store-txt-phone {
+				&:before {
+					content: "";
+					display: inline-block;
+					width: 13px;
+					height: 13px;
+					background-image: url(../images/phone_blue.png);
+					background-size: 100% 100%;
+					margin: rem(6) rem(11) 0 0;
+				}
+			}
+		}
+	}
+}
+
+.msg-home {
+	position: fixed;
+	z-index: 2;
+	right: rem(24);
+	bottom: rem(24);
+	.msg-home-common {
+		display: block;
+		width: rem(46);
+		height: rem(46);
+		border-radius: 50%;
+		&.msg-common {
+			background-color: #004e86;
+		    margin-bottom: rem(15);
+		    >span {
+		        display: inline-block;
+		        width: rem(26);
+		        height: rem(26);
+		        background-image: url(../images/message.png);
+		        background-size: 100% 100%;
+		        margin: rem(8) 0 0 rem(12);
+		    }
+		}
+		&.home-common {
+			background-color: #003051;
+	        >span {
+	        	display: inline-block;
+	        	width: rem(46);
+	        	height: rem(46);
+	        	background-image: url(../images/home_white.png);
+	        	background-size: 100% 100%;
+	        	// margin: rem(14) 0 0 rem(10);
+	      	}
+		}
+	}
+}

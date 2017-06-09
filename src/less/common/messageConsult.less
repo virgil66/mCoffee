@@ -1,0 +1,97 @@
+@import (reference) '../lib/bracket.less';
+
+.message-consult {
+	width: 100%;
+	margin-top: 49px;
+}
+
+.part{
+	width: 100%;
+	.part-txt {
+		.title {
+			padding: rem(12) rem(20);
+		}
+	}
+}
+
+.part-content {
+	width: 100%;
+	padding: 0 rem(15);
+	.message-items {
+		display: flex;
+		width: 100%;
+		height: rem(41);
+		background-color: #d7d7d7;
+		border: 1px solid #999;
+		margin-bottom: rem(11);
+		border-radius: rem(4);
+		justify-content: space-between;
+		>label {
+			display: inline-block;
+			width: rem(80);
+			height: rem(41);
+			line-height: rem(41);
+			color: #999;
+			font-size: 18px;
+			font-family: 'Microsoft yahei';
+			padding-left: rem(9);
+		}
+		>input {
+			width: rem(225);
+			height: rem(37);
+			margin-right: rem(8);
+			text-align: right;
+			margin-top: rem(1);
+			color: #999;
+			font-size: 18px;
+			font-family: 'Microsoft yahei';
+			background-color: #d7d7d7;
+		}
+	}
+	.message-content {
+		width: 100%;
+		background-color: #d7d7d7;
+		border: 1px solid #999;
+		border-radius: rem(4);
+		>label {
+			display: block;
+			height: rem(41);
+			line-height: rem(41);
+			color: #999;
+			font-size: 18px;
+			font-family: 'Microsoft yahei';
+			padding-left: rem(9);
+		}
+		>textarea {
+			display: block;
+			width: 100%;
+			height: rem(150);
+			padding: 0 rem(9);
+			resize: none;
+			margin-bottom: rem(11);
+			color: #999;
+			font-size: 18px;
+			font-family: 'Microsoft yahei';
+			background-color: #d7d7d7;
+			border: none;
+			outline: none;
+		}
+	}
+	.message-btn {
+		width: 100%;
+		height: rem(44);
+		margin: rem(30) 0 rem(100);
+		text-align: center;
+		>span {
+			display: inline-block;
+			width: rem(130);
+			height: rem(44);
+			line-height: rem(44);
+			color: #fff;
+			background-color: #004e7e;
+			font-size: 21px;
+			border-radius: rem(4);
+			text-align: center;
+		}
+	}
+}

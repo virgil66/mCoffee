@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<head>
+	<title>新闻资讯</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!-- 忽略将页面中的数字识别为电话号码 忽略Android平台中对邮箱地址的识别 -->
+	<meta name="format-detection" content="telephone=yes, email=no" />
+	<!-- 当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对ios的safari -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- 将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式 可选default、black、black-translucent -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta content="yes" name="apple-touch-fullscreen" />
+	<link rel="stylesheet" href="assets/css/base.min.css">
+	<link rel="stylesheet" href="assets/css/newsInformation.css">
+	<script src="assets/script/core.min.js"></script>
+	<script src="assets/script/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<div class="header"><head-nav /></div>
+	<div id="news-information" class="news-information">
+		<div class="part part-news">
+			<!-- <div class="part-items">
+				<a href="javascript:;">
+					<div class="part-img">
+						<img src="assets/images/bg_news_information.jpg" alt="..." />
+					</div>
+					<div class="part-content">
+						<div class="content-title">
+							<p>上海咖啡馆数量持续增涨，已突破6000家</p>
+						</div>
+						<div class="content-txt">
+							<p class="date">2017-06-01</p>
+							<p class="detail">随着众多独立咖啡馆的纷纷开张，上海咖啡馆的数量已经持续上涨，从去年的5000家已经增长至将近6000家，星巴克，costa等品牌连锁店的咖啡版图已经被悄然打破</p>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="part-items">
+				<a href="javascript:;">
+					<div class="part-img">
+						<img src="assets/images/bg_news_information.jpg" alt="..." />
+					</div>
+					<div class="part-content">
+						<div class="content-title">
+							<p>上海咖啡馆数量持续增涨，已突破6000家</p>
+						</div>
+						<div class="content-txt">
+							<p class="date">2017-06-01</p>
+							<p class="detail">随着众多独立咖啡馆的纷纷开张，上海咖啡馆的数量已经持续上涨，从去年的5000家已经增长至将近6000家，星巴克，costa等品牌连锁店的咖啡版图已经被悄然打破</p>
+						</div>
+					</div>
+				</a>
+			</div> -->
+		</div>
+		<div class="news-btn">
+			<span class="news-btn-default btn-home">首页</span>
+			<span class="news-btn-default btn-prev disabled">上一页</span>
+			<span class="news-btn-default btn-next">下一页</span>
+		</div>
+	</div>
+	<div class="top-msg-pos"><top-msg /></div>
+	<!-- <script src="tags/head_nav.html" type="riot/tag"></script>
+	<script src="tags/top_msg.html" type="riot/tag"></script> -->
+	<script src="tag/head_nav.js"></script>
+	<script src="tag/top_msg.js"></script>
+	<script id="news-item" type="text/template">
+		<div class="part-items">
+			<a href="newsDetail.html?id={id}">
+				<div class="part-img">
+					<img src="http://www.1bpcafe.cn{image}" alt="..." />
+				</div>
+				<div class="part-content">
+					<div class="content-title">
+						<p>{title}</p>
+					</div>
+					<div class="content-txt">
+						<p class="date">{create_time}</p>
+						<p class="detail">{abstract}</p>
+					</div>
+				</div>
+			</a>
+		</div>
+	</script>
+	<script>
+		riot.mount('*');
+
+		$('.news-information').on('click', function(e) {
+			var flagIn = $('.coffee-menu').hasClass('menu-fade-in');
+			if(flagIn) {
+				$('.coffee-menu').addClass('menu-fade-out').removeClass('menu-fade-in');
+			}
+		});
+
+		
+		var pageIndex = 0;
+
+		function renderNews(data) {
+			var template = $('#news-item').html();
+			$.each(data, function(key, value) {
+				var keyReg = new RegExp('({'+key+'})', 'ig');
+				template = template.replace(keyReg, value);
+			});
+			$('.part-news').append(template);
+		}
+
+		function newsList() {
+			$('.part-news').html('');
+			var dataList;
+			var url = "http://www.1bpcafe.cn/api/news?pageSize=5&pageIndex=" + pageIndex;
+			$.ajax({
+				url: url,
+				type: "get",
+				dataType: "json",
+				success: function(data) {
+					dataList = data.list;
+					dataList.forEach(function(value, index, arr) {
+						renderNews(value);
+					})
+				},
+				error: function(err) {
+
+				}
+			});
+		}
+
+		function newsNextList() {
+			var url = "http://www.1bpcafe.cn/api/news?pageSize=5&pageIndex=" + (pageIndex + 1);
+			$.ajax({
+				url: url,
+				type: "get",
+				dataType: "json",
+				success: function(data) {
+					console.log(data.list.length)
+					if(data.list.length == 0) {
+						$('.btn-next').addClass('disabled');
+					}
+					
+				},
+				error: function(err) {
+
+				}
+			});
+		}
+
+		newsList();
+		newsNextList();
+
+		$('.btn-home').on('click', function(e) {
+			$('.btn-prev').addClass('disabled');
+			$('.btn-next').removeClass('disabled');
+			pageIndex = 0;
+			newsList();
+			newsNextList();
+		});
+
+		$('.btn-prev').on('click', function(e) {
+			$('.btn-next').removeClass('disabled');
+			var flag = $(this).hasClass('disabled');
+			if(flag) {
+				return false;
+			}
+			pageIndex --;
+			newsList();
+			if(pageIndex == 0) {
+				$(this).addClass('disabled');
+			}
+		});
+
+		$('.btn-next').on('click', function(e) {
+			$('.btn-prev').removeClass('disabled');
+			var flag = $(this).hasClass('disabled');
+			if(flag) {
+				return false;
+			}
+			pageIndex ++;
+			newsList();
+			newsNextList();
+		})		
+	</script>
+</body>
+</html>

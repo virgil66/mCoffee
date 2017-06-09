@@ -1,0 +1,19 @@
+@import (reference) '../lib/bracket.less';
+
+
+.error {
+	text-align: center;
+	padding-top: rem(54);
+	.data-error {
+		display: block;
+		width: rem(163);
+		height: rem(128);
+		margin: 0 auto rem(27);
+	}
+	.error-information {
+		color: @cl_66;
+		font-size: 15px;
+		line-height: rem(21);
+		letter-spacing: 0;
+	}
+}

@@ -1,0 +1,98 @@
+@import (reference) '../lib/bracket.less';
+
+.total-amount {
+	min-height: rem(56);
+	background: @cl_00;
+	padding: rem(10) rem(12) rem(10) rem(16);
+}
+
+.total-amount-body {
+	display: flex;
+}
+
+.total-amount-icon {
+	width: rem(40);
+	margin-right: rem(10);
+	.total-amount-icon-icon {
+		width: rem(20);
+		height: rem(20);
+		margin-top: rem(9);
+	}
+}
+.total-amount-content {
+	color: @cl_66;
+	font-size: 14px;
+	letter-spacing: 0;
+	line-height: rem(18);
+	&:before {
+		float: left;
+		display: inline-block;
+		content: "";
+		width: rem(20);
+		height: rem(20);
+		background-image: url(../images/remind_icon.png);
+		background-size: contain;
+		margin-right: rem(12);
+		margin-top: rem(8);
+	}
+}
+
+#pay-details {
+	background: #f1f1f1;
+	.pay-details-list {
+		margin-bottom: rem(10);
+	}
+}
+.pay-details-content {
+	background-color: #fff;
+	height: rem(126);
+	// margin: 0 rem(16);
+	margin: 0;
+	border-bottom: 1px dashed @cl_f1;
+}
+.pay-content-title {
+	text-align: center;
+	color: @cl_66;
+	font-size: 14px;
+	letter-spacing: rem(-0.34);
+	line-height: rem(17);
+	padding: rem(25) 0 rem(20);
+}
+.pay-content-body {
+	text-align: center;
+	color: @cl_44;
+	font-size: 40px;
+	letter-spacing: rem(-0.96);
+	line-height: rem(40);
+	.pay-content-yen {
+		font-size: 24px;
+		letter-spacing: rem(-0.58);
+		line-height: rem(24);
+	}
+}
+list {
+	.columns {
+		height: rem(60);
+	}
+}
+.my-loan-num {
+	color: @cl_44;
+	font-size: 16px;
+	letter-spacing: 0;
+	line-height: rem(22.5);
+	.my-loan-yen {
+		margin-right: rem(5);
+	}
+}
+.my-loan-time {
+	color: @cl_88;
+	font-size: 12px;
+	letter-spacing: 0;
+	line-height: rem(14);
+}
+.item-after {
+	color: @cl_66;
+	font-size: 15px;
+	letter-spacing: rem(-0.36);
+	line-height: rem(18);
+}

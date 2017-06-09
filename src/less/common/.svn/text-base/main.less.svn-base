@@ -1,0 +1,140 @@
+@import (reference) '../lib/bracket.less';
+
+/* 状态二 */
+
+body {
+	background-color: @cl_f1;
+}
+.refund {
+	.level-6 {
+		color: @cl_44;
+		font-size: rem(12);
+		font-weight: 300;
+		line-height: rem(14);
+		letter-spacing: rem(-0.29);
+	}
+	.refund-number {
+		color: @cl_44;
+		font-size: rem(20);
+		letter-spacing: rem(-0.48);
+		line-height: rem(21);
+		padding: rem(12) 0 rem(9) 0;
+	}
+	.refund-number-details {
+		margin-left: rem(5);
+	}
+	.refund-tips {
+		color: @cl_99;
+		font-size: rem(12);
+		line-height: rem(14);
+		letter-spacing: rem(-0.29);
+	}
+}
+i.unknown-account {
+	display: inline-block;
+	width: rem(100);
+	height: rem(50);
+	background-image: url("../images/unknown.png");
+	background-size: 100% 100%;
+}
+span.mark {
+	vertical-align: middle;
+}
+
+
+.btn-default {
+	height: rem(44);
+	background-color: @cl_00;
+	color: @cl_44;
+	font-size: rem(15);
+	text-align: center;
+	border-top: 2px solid #f1f1f1;
+	.prepayment {
+		display: inline-block;
+		margin-top: rem(13);
+		line-height: rem(18);
+		letter-spacing: rem(-0.36);
+	}
+}
+
+/* 状态三 */
+
+.warning-info {
+	.columns {
+		height: rem(44);
+	}
+	.column {
+		color: #FA3B3B;
+		font-size: 16px;
+		line-height: rem(17);
+		letter-spacing: 0;
+	}
+}
+.warning-info.warning-info-blue {
+	.column {
+		color: @cl_66;
+	}
+}
+.waring-icon {
+	display: inline-block;
+	width: rem(20px);
+	min-width: rem(20px);
+	height: rem(20px);
+	background-image: url(../images/waiting_icon.png);
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+	margin: 0 rem(10) 0 0;
+	&.ui-gray {
+		background-image: url(../images/waiting_icon.png);
+	}
+	&.ui-blue {
+		background-image: url(../images/remind_icon.png);
+	}
+	&.ui-red {
+	  background-image: url(../images/warning_icon.png);
+	}
+}
+
+.over-day-red {
+	.column {
+		color: #FA3B3B !important;
+	}
+}
+
+/* 审核中 */
+.audit-audit-body {
+	text-align: center;
+	padding-top: rem(18);
+	padding-bottom: rem(36);
+    // border-bottom: 1px dashed #e5e5e5;
+	.audit-audit-bg,
+	.audit-audit-state {
+		vertical-align: middle;
+	}
+	.audit-audit-bg {
+		width: rem(16);
+		margin-right: rem(10);
+	}
+	.audit-audit-state {
+		color: @cl_66;
+		font-size: rem(18);
+		line-height: rem(19);
+		letter-spacing: 0;
+	}
+}
+.loader-area list {
+	margin-bottom: rem(-12);
+	margin-left: rem(-12);
+}
+
+.border-tp-line {
+	border-top: 1px dashed #e5e5e5;
+}
+
+.border-bm-line {
+	border-bottom: 1px dashed #e5e5e5;
+}
+.main-columns-border .columns {
+	border: 0;
+}

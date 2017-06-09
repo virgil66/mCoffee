@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<head>
+	<title>加入我们</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!-- 忽略将页面中的数字识别为电话号码 忽略Android平台中对邮箱地址的识别 -->
+	<meta name="format-detection" content="telephone=yes, email=no" />
+	<!-- 当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对ios的safari -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- 将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式 可选default、black、black-translucent -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta content="yes" name="apple-touch-fullscreen" />
+	<link rel="stylesheet" href="assets/css/base.min.css">
+	<link rel="stylesheet" href="assets/css/joinUs.css">
+	<script src="assets/script/core.min.js"></script>
+	<script src="assets/script/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<div class="header"><head-nav /></div>
+	<div class="join-us" id="join-us">
+		<div class="part part-join">
+			<div class="part-txt">
+				<div class="title">
+					<h1 class="level-1">加入我们</h1>
+					<p class="title-en">Join Us</p>
+				</div>
+				<div class="part-content">
+					<div class="part-items">
+						<h3 class="level-3">咖啡师<span>2名</span></h3>
+						<ol>
+							<li>1.年龄在18-28岁，高中（或中专）及以上学历</li>
+							<li>2.拥有一个健康的身体和爽朗的笑容；友好热情、乐于沟通、性格阳光</li>
+							<li>3.具有强烈团队意识，并且热爱咖啡行业，对西点、西餐制作有较强兴趣</li>
+							<li>4.具有食品类健康证</li>
+						</ol>
+					</div>
+					<div class="part-items">
+						<h3 class="level-3">厨师长<span>2名</span></h3>
+						<ol>
+							<li>1.高中以上学历，身体健康，有5年及以上西餐主厨工作管理经验的工作经验者优先</li>
+							<li>2.具有较强烈的责任心，用于开拓和创新，作风干练</li>
+							<li>3.拥有较高的烹饪技术，了解和熟悉食品材料的产地、规格、质量、一般进货</li>
+							<li>4.对成本控制管理、食品卫生、厨房的设备知识拥有相当的基础</li>
+							<li>5.有大型西式冷餐会经验者优先</li>
+						</ol>
+					</div>
+					<div class="part-items">
+						<h3 class="level-3">餐厅经理<span>2名</span></h3>
+						<ol>
+							<li>1.中专以上学历</li>
+							<li>2.热爱餐饮服务业、能吃苦耐劳</li>
+							<li>3.身体健康良好，热情</li>
+							<li>4.能够适应早晚班以及夜班工作的安排</li>
+							<li>5.良好的沟通技巧以及团队合作能力</li>
+							<li>6.具有强烈的工作责任感</li>
+							<li>7.有一定的西式快餐工作经验</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="part part-phone">
+			<div class="part-txt">
+				<div class="title">
+					<h1 class="level-1">联系方式</h1>
+					<p class="title-en">Contact</p>
+				</div>
+				<div class="phone-content">
+					<p class="phone">021-61520545</p>
+					<p class="email">hr@1bpcafe.cn</p>
+					<p class="address">上海市延安西路1612号</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="top-msg-pos"><top-msg /></div>
+	<!-- <script src="tags/head_nav.html" type="riot/tag"></script>
+	<script src="tags/top_msg.html" type="riot/tag"></script> -->
+	<script src="tag/head_nav.js"></script>
+	<script src="tag/top_msg.js"></script>
+	<script>
+		riot.mount('*');
+
+		$('.join-us').on('click', function(e) {
+			var flagIn = $('.coffee-menu').hasClass('menu-fade-in');
+			if(flagIn) {
+				$('.coffee-menu').addClass('menu-fade-out').removeClass('menu-fade-in');
+			}
+		});
+	</script>
+</body>
+</html>

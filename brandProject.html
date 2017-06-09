@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<head>
+	<title>关于品牌</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!-- 忽略将页面中的数字识别为电话号码 忽略Android平台中对邮箱地址的识别 -->
+	<meta name="format-detection" content="telephone=yes, email=no" />
+	<!-- 当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对ios的safari -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- 将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式 可选default、black、black-translucent -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta content="yes" name="apple-touch-fullscreen" />
+	<link rel="stylesheet" href="assets/css/base.min.css">
+	<link rel="stylesheet" href="assets/css/brandProject.css">
+	<script src="assets/script/core.min.js"></script>
+	<script src="assets/script/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<div class="header"><head-nav /></div>
+	<div class="brand-project" id="brand-project">
+		<div class="part coffee-store" id="coffee-store">
+			<div class="part-img">
+				<img src="assets/images/bg_coffee_store.jpg" alt="咖啡连锁店" />
+			</div>
+			<div class="part-txt">
+				<div class="title">
+					<h1 class="level-1">咖啡连锁店</h1>
+					<p class="title-en"></p>
+				</div>
+				<div class="coffee-store-content">
+					<p>“壹杯加”为一家以商业、实业、金融业为背景的餐饮品牌，首期注册资金五千万元。致力于打造“咖啡+银行”模式的综合平台化咖啡连锁品牌，我们以咖啡店及银行相关配套服务为发展平台，并以此为基础发展出壹杯加创客空间、壹杯加咖啡俱乐部等，建立起一个集餐饮、休闲、创业、金融服务为一体的立体式多元化连锁	基地。</p>
+				</div>
+			</div>
+		</div>
+		<div class="part coffee-space" id="coffee-space">
+			<div class="part-img">
+				<img src="assets/images/bg_recruitment.jpg" alt="壹+空间" />
+			</div>
+			<div class="part-txt">
+				<div class="title">
+					<h1 class="level-1">壹+空间</h1>
+					<p class="title-en">
+						<span>立体化</span><span>多元化</span>
+					</p>
+					<p class="title-en">创造互联网时代办公模式2.0</p>
+				</div>
+				<div class="coffee-space-content">
+					<h3 class="level-3">创客宗旨：</h3>
+					<div class="space-content">
+						<p>提供集团内部可用资源，全面协助小微企业成长</p>
+						<p>不限领域，汇聚各行各业，综合化企业孵化器</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="part training-institute" id="training-institute">
+			<div class="part-txt">
+				<div class="title">
+					<h1 class="level-1">培训学院</h1>
+					<p class="title-en">
+						<span>针对性</span><span>专业性</span><span>多样性</span>
+					</p>
+				</div>
+				<div class="training-institute-content">
+					<p>针对加盟商及门店运营人员提供专业性培训开设咖啡西点、红酒雪茄等品鉴课程</p>
+				</div>
+			</div>
+		</div>
+		<div class="part coffee-car" id="coffee-car">
+			<div class="part-img">
+				<img src="assets/images/bg_coffee_car.jpg" alt="移动咖啡车" />
+			</div>
+			<div class="part-txt">
+				<div class="title">
+					<h1 class="level-1">移动咖啡车</h1>
+					<p class="title-en"></p>
+				</div>
+				<div class="coffee-car-content">
+					<p>为拥有咖啡梦想的人提供便捷、快速、灵活的咖啡创业机会，鼓励咖啡产品领域的创新和发展</p>
+					<p>提供环保动力车的租赁及相关证照办理、提供咖啡等饮品的原料统一配送以及制作培训等</p>
+				</div>
+			</div>
+		</div>
+		<div class="part internet-platform" id="internet-platform">
+			<div class="part-txt">
+				<div class="title">
+					<h1 class="level-1">网上支持平台</h1>
+					<p class="title-en"></p>
+				</div>
+				<div class="internet-platform-content">
+					<p>提供即时采买、咨询、管控等便捷通道</p>
+					<p>优化餐饮企业复杂的采购流程体系</p>
+					<p>全面提升餐饮商品流通效率</p>
+					<p>降低中小型餐饮企业（咖啡馆，西餐厅，茶馆等）采购成本</p>
+					<p>促进餐饮业态的持续发展</p>
+					<p>满足一切可能的客户需求</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="top-msg-pos"><top-msg /></div>
+	<!-- <script src="tags/head_nav.html" type="riot/tag"></script>
+	<script src="tags/top_msg.html" type="riot/tag"></script> -->
+	<script src="tag/head_nav.js"></script>
+	<script src="tag/top_msg.js"></script>
+	<script>
+		riot.mount('*');
+
+		$('.brand-project').on('click', function(e) {
+			var flagIn = $('.coffee-menu').hasClass('menu-fade-in');
+			if(flagIn) {
+				$('.coffee-menu').addClass('menu-fade-out').removeClass('menu-fade-in');
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<head>
+	<title>留言咨询</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!-- 忽略将页面中的数字识别为电话号码 忽略Android平台中对邮箱地址的识别 -->
+	<meta name="format-detection" content="telephone=yes, email=no" />
+	<!-- 当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对ios的safari -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- 将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式 可选default、black、black-translucent -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta content="yes" name="apple-touch-fullscreen" />
+	<link rel="stylesheet" href="assets/css/base.min.css">
+	<link rel="stylesheet" href="assets/css/messageConsult.css">
+	<script src="assets/script/core.min.js"></script>
+	<script src="assets/script/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<div class="header"><head-nav /></div>
+	<div id="message-consult" class="message-consult">
+		<div class="part part-message">
+			<div class="part-txt">
+				<div class="title">
+					<h1 class="level-1">留言咨询</h1>
+					<p class="title-en"></p>
+				</div>
+			</div>
+			<div class="part-content">
+				<form id="form-message" class="form-message">
+					<div class="message-items">
+						<label>姓名</label>
+						<input type="text" name="userName" />
+					</div>
+					<div class="message-items">
+						<label>E-mail</label>
+						<input type="email" name="email" />
+					</div>
+					<div class="message-items">
+						<label>手机号</label>
+						<input type="number" pattern="[0-9]*" maxlength="11" name="phone" />
+					</div>
+					<div class="message-content">
+						<label>留言</label>
+						<textarea name="message"></textarea>
+					</div>
+				</form>
+				<div class="message-btn">
+					<span class="message-submit">提交</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <script src="tags/head_nav.html" type="riot/tag"></script> -->
+	<script src="tag/head_nav.js"></script>
+	<script>
+		riot.mount("*");
+
+		$('.message-consult').on('click', function(e) {
+			var flagIn = $('.coffee-menu').hasClass('menu-fade-in');
+			if(flagIn) {
+				$('.coffee-menu').addClass('menu-fade-out').removeClass('menu-fade-in');
+			}
+		});
+
+		$('.message-submit').on('click', function(e) {
+			if(dataJudgment()) {
+				$.ajax({
+	   				url: "http://www.1bpcafe.cn/api/message",
+	   				type: "post",
+	   				data: $('#form-message').serialize(),
+	   				success: function(data){
+	   					alert("提交成功");
+	   				},
+	   				error:function(data) {
+	   					alert("请求失败，请稍后重试！");
+	   				}
+	   			})
+			}
+		});
+
+		/**
+	    *  输入框的判断实现 
+	    */
+	    function dataJudgment(){
+	   		var userName = $('.message-items').find('input[name=userName]');
+	   		var eMail = $('.message-items').find('input[name=email]');
+	   		var phone = $('.message-items').find('input[name=phone]');
+	   		var message = $('.message-content').find('textarea[name=message]');
+	   		var str_userName = "姓名";
+	   		var str_eMail = "E-mail";
+	   		var str_phone = "手机号";
+	   		var str_tx = "留言";
+	   		if(isNotNull(userName,str_userName) && isMail(eMail,str_eMail) && isMobile(phone,str_phone) && textLength(message,str_tx)){
+	   			return true;
+	   		}else{
+	   			return false;
+	   		}
+	    }
+
+		/**
+	    * 输入框内容为空
+	    */
+	    function isNull(obj){
+	   		if(trim(obj.val()).length == 0){
+	   			return true;
+	   		}else{
+	   			return false;
+	   		}
+	    }
+
+	    /**
+	    * 表单内容不能为空
+	    */
+	    function isNotNull(obj,str){
+	   		if(isNull(obj)){
+	   			alert(str+"不能为空！");
+	   			obj.focus();
+	   			return false;
+	   		}else{
+	   			return true;
+	   		}
+	    }
+
+	    /**
+	     * 留言内容长度限制
+	     */
+	    function textLength(obj,str){
+	   		if(!isNotNull(obj,str)){
+		    	return false;  
+		    } 
+
+	   		if(!isNull(obj) && trim(obj.val()).length > 200){
+	   			alert(str+"的长度不能超过200！");
+	   			console.log(obj.val().length);
+	   			obj.focus();
+	   			return false;
+	   		}else{
+	   			return true;
+	   		}
+
+	    }
+
+	    /**
+	    * 判断邮件地址是否合法
+	    */
+	    function isMail(obj,str){
+	   		var pattern = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;  
+		    if(!isNotNull(obj,str)){
+		    	return false;  
+		    } 
+		    	
+		    if(!(pattern.test(obj.val())) && !isNull(obj)){     
+		        alert(str+" 不是合法电子邮件格式！");  
+		        obj.focus();  
+		        return false;  
+		    }else{
+		    	return true;
+		    }
+	    }
+
+	    /**
+	    * 判断手机号码的有效性
+	    */
+	    function isMobile(obj,str){
+	   		var pattern = /^1[34578]\d{9}$/;
+	   		if(!isNotNull(obj,str)){
+	   			return false;
+	   		} 
+		    if(!(pattern.test(obj.val()))&&!isNull(obj)){     
+		        alert(str+" 不正确！");  
+		        obj.focus();  
+		        return false;  
+		    }else{
+		    	return true;
+		    }
+	    }
+
+	    /**
+	    * trim函数，去除字符串两侧的空格
+	    */
+	    function trim(obj){
+	   		return $.trim(obj);
+	    }
+
+	</script>
+</body>
+</html>

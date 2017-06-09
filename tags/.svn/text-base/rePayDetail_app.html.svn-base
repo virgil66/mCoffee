@@ -1,0 +1,254 @@
+<card>
+    <div class="card-header" if={(number!=1)}>
+        <div class="card-title">
+            {formatDate(firstRepayDate)} 借款 &yen;{needPaySumAmt}
+        </div>
+        <div class="show-title top">
+            <div class="columns">
+                <div class="column is-one-third text-left">第1期</div>
+                <div class="column is-one-third text-center runtime">
+                </div>
+                <div class="column is-one-third text-right">
+                    <span>第{number}期</span>
+                </div>
+            </div>
+        </div>
+        <div class="show-bar">
+            <div class="columns">
+                <div class="column is-one-third text-left">
+                    <span class="dot passed" if={current!=1}></span>
+                    <span class="dot runtime" if={current==1}></span>
+                </div>
+                <div class="column is-one-third text-center">
+                    <!-- <span class="dot"></span> -->
+                </div>
+                <div class="column is-one-third text-right">
+                    <span class="dot" if={current!=number}></span>
+                </div>
+            </div>
+        </div>
+        <div class="show-bar-line">
+            <div class="columns">
+                <!-- <div class="column passed"></div> -->
+                <div class="{ column:true,passed:index+1<current }" each="{item, index in total}">
+                    <!-- if={(index+1== current)} -->
+                    <div class="current dot" if={(index+2==current)}>
+                        <span class="{success-finished:true,hint-text:true,
+              left:(getCurrentPosition()=="left"),
+              right:(getCurrentPosition()=="right"),
+              center:(getCurrentPosition()=="center")}" if={ currentResult }>{currentResult}第{current}期</span>
+                        <span class="{success-finished:true,hint-text:true,
+                      left:(getCurrentPosition()=="left"),
+                      right:(getCurrentPosition()=="right"),
+                      center:(getCurrentPosition()=="center")}" if={ sucessFlag }>已结清</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="show-title">
+            <div class="columns">
+                <div class="column is-one-third text-left">
+                    <span class="theme-color" if={(current==1)}>{currentResult}第1期</span>
+                </div>
+                <div class="column is-one-third text-center runtime">
+                </div>
+                <div class="column is-one-third text-right hidden">
+                    第X期
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-header" if={(number==1)}>
+      <div class="card-title">
+          {formatDate(firstRepayDate)} 借款 &yen;{needPaySumAmt}
+      </div>
+      <div class="show-title top">
+            <div class="columns">
+                <div class="column is-one-third text-left"></div>
+                <div class="column is-one-third text-center runtime">
+                </div>
+                <div class="column is-one-third text-right">
+                    <span>第1期</span>
+                </div>
+            </div>
+        </div>
+      <div class="show-bar">
+          <div class="columns">
+            <div class="column is-one-thirds text-left">
+                <span class="dot passed"></span>
+            </div>
+            <div class="column is-one-thirds text-center">
+                
+            </div>
+            <div class="column is-one-thirds text-right">
+                  <span class="dot runtime"  id="sinlgeDot"></span>
+            </div>
+          </div>
+      </div>
+      <div class="show-bar-line">
+        <div class="columns">
+          <div class="column passed is-half"></div>
+          <div class="column passed is-half"></div>
+        </div>
+      </div>
+      <div class="show-title">
+          <div class="columns">
+            <div class="column is-one-thirds text-left"></div>
+            <div class="column is-one-thirds text-center runtime"></div>
+            <div class="column is-one-thirds text-right hint-text">已结清</div>
+          </div>
+      </div>
+    </div>
+    <div class="card-body">
+        <div class="card_list" each="{item, index in items}">
+            <div class="{ columns:true, theme-color: (item.repayResult == "03"), light: (item.repayResult != "03") }">
+                <div class="item-title column">
+                    <span class="order">{index+1}</span>&yen;{item.repayAmt}
+                    <span if={ item.repayResult == "02" && item.overDueRepayAmt} class="over-repay">(逾期已还&yen;{item.overDueRepayAmt})</span>
+                </div>
+                <div class="item-after ">
+                    {formatDate(item.repayDate)}&nbsp;{getResult(item.repayResult,item.overdueDay)}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //新增预期多行颜色显示
+        var self = this;
+        this.number = 1;
+        this.total;
+        this.current;
+        this.currentResult;
+        this.needPaySumAmt;
+        this.firstRepayDate;
+        this.items = [];
+        var sucessFlag = false;
+        var overFlag = false;
+        var redColorFlag = false;
+
+        getCurrentPosition() {
+            var total = this.number;
+            var current = this.current;
+            if (total % 2 == 0) {
+                var rule = total / 2;
+                if (current <= rule) {
+                    return 'left';
+                } else {
+                    return 'right';
+                }
+            } else {
+                var rule = Math.ceil(total / 2);
+                if (current == rule) {
+                    return 'center'
+                } else if (current < rule) {
+                    return 'left'
+                } else {
+                    return 'right'
+                }
+            }
+        }
+        
+        getResult(code, overdueDay) {
+            if (code == '01') {
+                return '未还款'
+            } else if (code == '02') {
+                return '已还款'
+            } else if (code == '03') {
+                if (overdueDay) {
+                    return '逾期' + overdueDay + '天'
+                } else {
+                    return '逾期'
+                }
+            } else if(code == "04") {
+                return '还款中'
+            }
+        }
+        formatDate(data) {
+            if(data == null) {
+                return "";
+            } else {
+                return data.replace(/\//g, ".");
+            }
+        }
+        window.rePayDetail = function(jsonObjectStr) {
+            var jsonObj = JSON.parse(jsonObjectStr);
+            var repayPeriod = parseInt(jsonObj.repayPeriod, 10);
+            var currentPeriod = parseInt(jsonObj.currentPeriod, 10);
+            var currentResult = jsonObj.currentResult;
+            if (currentResult == '03') {
+                currentResult = "(已逾期)";
+                $(".main-card").addClass("red-theme");
+                self.update({
+                    sucessFlag: false
+                })
+                
+            } else {
+                if(repayPeriod == currentPeriod) {
+                    currentResult = "";
+                    self.update({
+                        sucessFlag: true
+                    })
+                } else {
+                    currentResult = "(还款中)";
+                }
+            }
+            var firstRepayDate = jsonObj.firstRepayDate;
+            var repayInfoList = jsonObj.repayInfoList;
+            var needPaySumAmt = jsonObj.needPaySumAmt;
+            
+            self.update({
+                currentResult: currentResult,
+                number: repayPeriod,
+                total: new Array(repayPeriod - 1),
+                current: currentPeriod,
+                firstRepayDate: firstRepayDate,
+                needPaySumAmt: needPaySumAmt,
+                items: repayInfoList
+            });
+        }
+
+
+        // var testData = {
+        //     currentResult: "03",
+        //     needPaySumAmt: "1000",
+        //     firstRepayDate: "2012/12/12",
+        //     repayPeriod: "6",
+        //     currentPeriod: "3",
+        //     repayInfoList: [{
+        //             "repayAmt": "333",
+        //             "repayDate": "2012/12/12",
+        //             "repayResult": "02"
+        //         },
+        //         {
+        //             "repayAmt": "333",
+        //             "repayDate": "2012/12/12",
+        //             "repayResult": "02"
+        //         },
+        //         {
+        //             "repayAmt": "333",
+        //             "repayDate": "2012/12/12",
+        //             "repayResult": "02",
+        //             "overDueRepayAmt": "500"
+        //         },
+        //         {
+        //             "repayAmt": "333",
+        //             "repayDate": "2012/12/12",
+        //             "repayResult": "03",
+        //             "overdueDay": "4"
+        //         },
+        //         {
+        //             "repayAmt": "333",
+        //             "repayDate": "2012/12/12",
+        //             "repayResult": "01"
+        //         }
+        //     ]
+        // }
+        // var testData = JSON.stringify(testData);
+        // rePayDetail(testData);
+
+        //  加载
+        this.on('mount', function() {
+            nativeJS.onPageFinish();
+        });
+    </script>
+</card>

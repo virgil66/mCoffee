@@ -1,0 +1,33 @@
+@import (reference) '../lib/bracket.less';
+
+.agree-bar {
+  margin-top: rem(15);
+  margin-bottom: rem(20);
+  font-size: 14px;
+  line-height: rem(24);
+  .container();
+  > checkbox {
+    margin-right: rem(10);
+  }
+  .column {
+  	color: @cl_44;
+  	font-size: 14px;
+  	letter-spacing: 0;
+  	line-height: rem(24);
+  }
+}
+
+.columns {
+	.item-title {
+		color: @cl_44;
+		font-size: 16px;
+		letter-spacing: 0;
+		line-height: rem(22.5);
+	}
+	.item-after {
+		color: @cl_66;
+		font-size: 15px;
+		letter-spacing: rem(-0.36);
+		line-height: rem(18);
+	}
+}

@@ -1,0 +1,100 @@
+@import (reference) '../lib/bracket.less';
+
+/* 首页审核中 */
+body {
+	background-color: @cl_f1;
+}
+.columns {
+	.column.column-gray {
+		color: @cl_66;
+		font-size: rem(14);
+		letter-spacing: 0;
+		line-height: rem(17);
+	}
+}
+.audit-body-audit {
+	padding: rem(18) 0;
+	background: url(../images/audit_bg.png);
+	background-size: contain;
+}
+.audit-audit-body {
+	text-align: center;
+	.audit-audit-bg,
+	.audit-audit-state {
+		vertical-align: middle;
+	}
+	.audit-audit-bg {
+		width: rem(16);
+		margin-right: rem(10);
+	}
+	.audit-audit-state {
+		color: @cl_66;
+		font-size: rem(18);
+		line-height: rem(19);
+		letter-spacing: 0;
+	}
+}
+.audit-body-waiting {
+	min-height: rem(51);
+	height: rem(51);
+	padding: rem(19) 0 rem(9);
+	border-top: 1px dashed @cl_e5;
+	margin-top: rem(32);
+	&:before {
+		display: inline-block;
+		content: "";
+		width: rem(20);
+		height: rem(20);
+		background-image: url(../images/waiting_icon.png);
+		background-size: 100% 100%;
+		vertical-align: bottom;
+		margin-right: rem(5);
+	}
+	.audit-waiting-news {
+		vertical-align: middle;
+	}
+	.audit-waiting-news {
+		color: @cl_66;
+		font-size: rem(14);
+		line-height: rem(17);
+		letter-spacing: 0;
+	}
+}
+
+/* 按时期计息 */
+.notice {
+	min-height: rem(56);
+	height: rem(56);
+	background-color: @cl_00;
+	padding: rem(10) rem(12);
+}
+.notice-body {
+	display: flex;
+	.notice-body-icon {
+		display: inline-block;
+		width: rem(40);
+	}
+	.notice-icon-icon {
+		width: rem(20);
+		height: rem(20);
+	}
+	.notice-body-infro {
+		display: inline-block;
+		color: @cl_66;
+		font-size: rem(14);
+		letter-spacing: 0;
+		line-height: rem(18);
+		&:before {
+			float: left;
+			display: inline-block;
+			content: "";
+			width: rem(20);
+			height: rem(20);
+			background-image: url(../images/warning_icon.png);
+			background-size: 100% 100%;
+			vertical-align: bottom;
+			margin-top: rem(7);
+			margin-right: rem(7);
+		}
+	}
+}

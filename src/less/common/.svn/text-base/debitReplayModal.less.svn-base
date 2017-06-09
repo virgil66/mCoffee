@@ -1,0 +1,50 @@
+@import (reference) '../lib/bracket.less';
+
+body {
+    margin: 0;
+    background-color: #fff;
+    font-family: "Microsoft Yahei UI", "Microsoft Yahei", SimSun, sans-serif;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.modal-title {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  font-size: 15px;
+  padding-left: 48px;
+  text-align: left;
+  line-height: 28px;
+  vertical-align: middle;
+  color: #666;
+  border-bottom: solid 1px #ddd;
+}
+
+list {
+  display: flex;
+  color: #666;  
+  background-color: #fff;
+  padding: 0 32px;
+  cursor: pointer;
+  border-bottom: solid 1px #ddd;
+  > .columns {
+    min-height: 38px;
+    height: 46px;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #666;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .time {
+    margin-right: 28px;
+  }
+}

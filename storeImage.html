@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<head>
+	<title>门店形象</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!-- 忽略将页面中的数字识别为电话号码 忽略Android平台中对邮箱地址的识别 -->
+	<meta name="format-detection" content="telephone=yes, email=no" />
+	<!-- 当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对ios的safari -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- 将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式 可选default、black、black-translucent -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta content="yes" name="apple-touch-fullscreen" />
+	<link rel="stylesheet" href="assets/css/base.min.css">
+	<link rel="stylesheet" href="assets/css/storeImage.css">
+	<link rel="stylesheet" href="assets/css/swiper.min.css">
+	<script src="assets/script/core.min.js"></script>
+	<script src="assets/script/jquery-3.2.1.min.js"></script>
+	<script src="assets/script/swiper.jquery.min.js"></script>
+</head>
+<body>
+	<div class="header"><head-nav /></div>
+	<div id="store-image" class="store-image">
+		<div id="swiper-container1" class="swiper-container">
+			<ul class="swiper-wrapper">
+				<li class="swiper-slide" data-hash="slide1" data-history="slide1">
+					<div class="wrapper-container">
+						<a href="javascript:;" class="wrapper-img">
+							<img src="assets/images/bg_store_01.jpg" alt="旗舰店" />
+						</a>
+					</div>
+				</li>
+				<li class="swiper-slide" data-hash="slide2" data-history="slide2">
+					<div class="wrapper-container">
+						<a href="javascript:;" class="wrapper-img">
+							<img src="assets/images/bg_store_02.jpg" alt="迷你店" />
+						</a>
+					</div>
+				</li>
+				<li class="swiper-slide" data-hash="slide3" data-history="slide3">
+					<div class="wrapper-container">
+						<a href="javascript:;" class="wrapper-img">
+							<img src="assets/images/bg_store_03.jpg" alt="标准店" />
+						</a>
+					</div>
+				</li>
+			</ul>
+			<div class="swiper-pagination swiper-store-pos"></div>
+		</div>
+		<div id="swiper-container2" class="swiper-container">
+			<ul class="swiper-wrapper">
+				<li class="swiper-slide" data-hash="slide1" data-history="slide1">
+					<div class="store-container">
+						<div class="store-content">
+							<div class="store-title">旗舰店</div>
+							<div class="store-txt">
+								<p class="store-txt-address">上海市长宁区通协路272号5A-5C</p>
+								<p class="store-txt-phone">021-61550517</p>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="swiper-slide" data-hash="slide2" data-history="slide2">
+					<div class="store-container">
+						<div class="store-content">
+							<div class="store-title">迷你店</div>
+							<div class="store-txt">
+								<p class="store-txt-address">上海市长宁区延安西路1612号</p>
+								<p class="store-txt-phone">021-61550517</p>
+							</div>
+						</div>
+					</div>			
+				</li>
+				<li class="swiper-slide" data-hash="slide3" data-history="slide3">
+					<div class="store-container">
+						<div class="store-content">
+							<div class="store-title">标准店</div>
+							<div class="store-txt">
+								<p class="store-txt-address">上海市长宁区通协路272号5A-5C</p>
+								<p class="store-txt-phone">021-61550517</p>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="msg-home">
+		<a href="messageConsult.html" class="msg-home-common msg-common">
+			<span></span>
+		</a>
+		<a href="/" class="msg-home-common home-common">
+			<span></span>
+		</a>
+	</div>
+	<!-- <script src="tags/head_nav.html" type="riot/tag"></script> -->
+	<script src="tag/head_nav.js"></script>
+	<script>
+		riot.mount('*');
+
+		$('.store-image').on('click', function(e) {
+			var flagIn = $('.coffee-menu').hasClass('menu-fade-in');
+			if(flagIn) {
+				$('.coffee-menu').addClass('menu-fade-out').removeClass('menu-fade-in');
+			}
+		});
+
+		// $('.msg-common').on('click', function(e) {
+		// 	window.location.href = "messageConsult.html";
+		// });
+
+		// $('.home-common').on('click', function(e) {
+		// 	window.location.href = "/";
+		// })
+
+		var Swiper1 = new Swiper('#swiper-container1', {
+			loop: true,
+			// autoplay: 5000,
+			hashnav: true,
+			hashnavWatchState: true,
+			setWrapperSize: true,
+			freeMode: false,
+			preventLinksPropagation: true,
+			touchAngle: 45,
+			resistance: true,
+			passiveListeners: false, // 有时会与 e.preventDefault 冲突
+			pagination: '.swiper-pagination',
+			paginationType: 'bullets', // 分页器样式 bullets-圆点 fraction-分式 progress-进度条
+			paginationClickable: false,  // 点击分页器控制 swiper 切换
+			paginationElement: 'li', // 设置分页器的 HTML 标签
+			keyboardControl: true, // 允许键盘控制 swiper 切换
+			mousewheelControl: false,  // 允许鼠标滚轮控制 swiper 切换
+			zoomToggle: false,
+			// effect 参数 " fade cube  coverflow flip "
+			// effect: 'coverflow'
+		});
+
+		var Swiper2 = new Swiper('#swiper-container2', {
+			loop: true,
+			// autoplay: 5000,
+			hashnav: true,
+			hashnavWatchState: true,
+			setWrapperSize: true,
+			freeMode: false,
+			preventLinksPropagation: true,
+			touchAngle: 45,
+			resistance: true,
+			passiveListeners: false, // 有时会与 e.preventDefault 冲突
+		})
+
+		Swiper1.params.control = Swiper2;
+		Swiper2.params.control = Swiper1;
+	</script>
+</body>
+</html>

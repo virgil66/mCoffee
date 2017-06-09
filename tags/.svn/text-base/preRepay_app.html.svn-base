@@ -1,0 +1,160 @@
+<app>
+    <item class= { disabled: (loanStatus=="0") } each={ items }>
+        <key-item>
+            <checkbox onClick= { parent.toggle }>
+                <input type="checkbox" checked={ done }>
+                <i class="icon icon-form-checkbox"></i>
+            </checkbox>
+            <div class="box-lend-body">
+                <div class="box-lend-num">借款&nbsp;&yen;&nbsp;{loanAmt}</div>
+                <div class="box-lend-time">{ formatDate(loanDate) }</div>
+            </div>
+        </key-item>
+        <div class="box-forward-repay">
+            应还 <span class="box-repay-list">&nbsp;&yen;&nbsp;{needpayAmt}</span>
+        </div>
+    </item>
+    <div class="box-forward-all">
+        <key-item>
+            <checkbox  onClick= { toggleAll }>
+                <input type="checkbox" checked={ selectAll }>
+                <i class="icon icon-form-checkbox"></i>
+            </checkbox>
+            <div class="box-lend-body">
+                <div class="box-lend-num">全选</div>
+            </div>
+        </key-item>
+        <div class="box-forward-repay">
+            总计 <span class="box-repay-amount"><i>&nbsp;&yen;&nbsp;</i>{count}</span>
+        </div>
+    </div>
+    <div class="hint-area" if={hasNouse}>
+      <h4>提示：</h4>
+      <p>①&nbsp;银行正在自动扣款，或者正在处理还款时，暂时无法选中借款进行提前还款。</p>
+      <p>②&nbsp;当日借款需次日才可还款。</p>
+    </div>
+    <style>
+        checkbox input[type="checkbox"] {
+            display: none;
+        }
+        .icon.icon-form-checkbox {
+            position: relative;
+            border-radius: 22px;
+            border: 1px solid #c7c7cc;
+            width: 22px;
+            height: 22px;
+        }
+        input[type="checkbox"]:checked+.icon.icon-form-checkbox {
+            background-image: url("assets/images/float@2x.png");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            border: 0;
+        }
+    </style>
+    <script>
+    var self = this;
+    this.items;
+    this.selectAll = false;
+    this.count = 0;
+    this.hasNouse = false;
+
+    toggle(e) {
+      var item = e.item;
+
+      if(item.loanStatus=="0") {
+        return false;
+      }
+
+      var state = !item.done;
+      item.done = state;
+      this.getTotal();
+      if(!state) {
+        this.update({
+          selectAll: false
+        });
+      }
+      return true;
+    }
+    toggleAll(e) {
+      var state = (!this.selectAll);
+      this.update({
+        selectAll: state
+      });
+      $(this.items).each(function(index,item){
+        if(item.loanStatus=="0") {
+          return false;
+        }
+        item.done = state;
+      });
+      this.getTotal();
+    }
+    formatDate(str) {
+      return  str.replace(/\//g,".")
+    }
+    getTotal() {
+      var count = 0;
+      $(this.items).each(function(index,item){
+        if(item.done) {
+          count += parseFloat(item.needpayAmt);
+        }
+      });
+      if(count) {
+        $(".submit-btn").removeClass("disabled");
+      } else {
+        $(".submit-btn").addClass("disabled");
+      }
+      count = count.toFixed(2);      
+      this.update({
+        count: count
+      });
+    }
+    window.receiptList = function(jsonObjectStr) {
+      var jsonObj = JSON.parse(jsonObjectStr);
+      var items =	jsonObj.loanList;
+      /**
+	     * loanId 贷款编号
+	     * loanAmt 贷款金额
+	     * needpayAmt 应还金额
+	     * loanDate 借款日期
+	     * loanStatus 状态
+	     */
+
+      $(items).forEach(function(item){
+        if(item.loanStatus=="0") {
+          self.update({
+            hasNouse:true
+          });
+          return false;
+        }
+      })
+      self.update({
+        items: items
+      });
+      // $(".submit-btn").removeClass("disabled");
+    }
+    //receiptList();
+    $("#handlepreRepayCommit").tap(function() {
+      if($('#handlepreRepayCommit').hasClass('disabled')) {
+        return false;
+      }
+      var list = self.items.filter(function(item){
+        return item.done;
+      });
+      var countFloat = parseFloat(self.count).toFixed(2);
+      var countStr = String(countFloat);
+      var data = {
+        "loanIdList": list,
+        "totalNeedpayAmt": countStr
+      }
+      data = JSON.stringify(data);
+      nativeJS.preRepayCommit(data);
+    });
+
+    //加载
+    this.on('mount', function(){
+        nativeJS.onPageFinish();
+    })
+
+    </script>
+</app>

@@ -1,0 +1,35 @@
+@import (reference) '../lib/bracket.less';
+
+.article-container {
+  background-color: #fff;
+  min-height: 100%;
+}
+.article-title {
+  height: rem(50);
+  line-height: rem(50);
+  vertical-align: middle;
+  font-size: 16px;
+  .container();
+  color: #444;
+  >.wrap {
+    border-bottom: solid 1px #efefef;
+  }
+}
+
+.article-content {
+  .container();
+  padding-top: rem(12);
+  padding-bottom: rem(12);
+  line-height: 22px;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #444;
+  img {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    line-height: 0;
+  }
+}

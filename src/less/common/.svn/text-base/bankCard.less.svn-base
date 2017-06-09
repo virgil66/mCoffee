@@ -1,0 +1,38 @@
+@import (reference) '../lib/bracket.less';
+@import "mobileVertifyCode";
+@import "completeInformation";
+
+
+.item-title.column {
+	color: @cl_66;
+}
+
+.form-control::placeholder {
+	color: @cl_66;
+}
+
+.code-container {
+	.form-control,
+	.get-button {
+		font-size: 16px;
+	}
+}
+
+.input-field-container {
+	.item-title {
+		width: rem(60);
+		flex-basis: rem(60);
+	}
+	.item-after {
+		padding-left: 0;
+	}
+}
+.item-after.user-name,
+.item-after.identity-number {
+	font-size: 16px;
+	text-indent: 6px;
+}
+
+.get-button {
+	font-size: 16px;
+}
